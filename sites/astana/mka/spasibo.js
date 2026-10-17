@@ -1,11 +1,13 @@
 import {fireConversions} from './conversion.js';
+import {startConfetti} from './confetti.js';
 
 const CONFIRM_URL = 'https://api.it-step.kz/lead/confirm?t=';
-const TEXTS = {
- ok: ['Заявка принята', 'Академия свяжется с вами в ближайшее время.'],
- used: ['Заявка уже принята', 'Эта страница уже открывалась. Мы получили вашу заявку и свяжемся с вами.'],
- none: ['Заявка не найдена', 'Откройте сайт и отправьте заявку заново или позвоните в академию: +7 (705) 957-51-50.'],
- error: ['Не удалось проверить заявку', 'Если вы только что отправили форму, мы её получили. Для уверенности позвоните: +7 (705) 957-51-50.']
+const PHONE = '+7 (705) 957‑51‑50';   // неразрывно, чтобы номер не рвался при переносе строки
+export const TEXTS = {
+ ok: ['Молодец — первый шаг сделан!', 'Ура, <mark>заявка принята</mark>!', 'Мы уже получили вашу заявку и скоро свяжемся, чтобы записать на пробный урок.'],
+ used: ['Всё в порядке', 'Заявка <mark>уже у нас</mark>', 'Эта страница уже открывалась, повторно отправлять заявку не нужно. Мы свяжемся с вами.'],
+ none: ['Что-то пошло не так', 'Не нашли <mark>вашу заявку</mark>', 'Откройте сайт и отправьте форму ещё раз или позвоните в академию: ' + PHONE + '.'],
+ error: ['Проверка не удалась', 'Не удалось <mark>проверить заявку</mark>', 'Если вы только что отправили форму, мы её получили. Для уверенности позвоните: ' + PHONE + '.']
 };
 
 /** Возвращает 'ok' | 'used' | 'none' | 'error'; конверсии запускаются только при 'ok'. */
@@ -19,11 +21,19 @@ export async function confirmThanks(token, {transport = fetch, win = globalThis.
  } catch { return 'error'; }
 }
 
+export function render(state, doc = globalThis.document) {
+ const [eyebrow, title, text] = TEXTS[state];
+ doc.body.dataset.state = state;
+ doc.getElementById('eyebrow').textContent = eyebrow;
+ doc.getElementById('title').innerHTML = title;            // разметка только из констант выше
+ doc.getElementById('text').textContent = text;
+ doc.title = state === 'ok' ? 'Заявка принята — Академия ШАГ' : 'Академия ШАГ';
+}
+
 if (typeof document !== 'undefined' && document.getElementById('title')) {
  const token = new URLSearchParams(location.search).get('t') || '';
  confirmThanks(token).then(state => {
-  const [title, text] = TEXTS[state];
-  document.getElementById('title').textContent = title;
-  document.getElementById('text').textContent = text;
+  render(state);
+  if (state === 'ok') startConfetti(document.getElementById('confetti'));
  });
 }
