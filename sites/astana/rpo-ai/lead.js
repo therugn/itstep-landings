@@ -1,6 +1,6 @@
 /** Приёмщик заявок (репозиторий itstep-leads): CRM + журнал + Telegram. Пустая строка = демо-режим формы. */
 export const LEAD_ENDPOINT = 'https://api.it-step.kz/lead';
-export const PRODUCT = 'RPO + AI';
+export const PRODUCT = 'РПО + AI';
 const TRACKING = /^(utm_[a-z_]+|gclid|yclid|fbclid)$/;
 
 /** Тело запроса приёмщику: поля формы + метки рекламы из адреса страницы. */
