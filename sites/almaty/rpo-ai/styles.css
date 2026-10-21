@@ -682,3 +682,9 @@ details summary{display:flex;align-items:center;gap:20px;cursor:pointer;list-sty
  main>.contacts-section>.section{padding-block:28px}
  .footer{padding-top:28px}
 }
+
+/* Плавающая кнопка WhatsApp (whatsapp.js) */
+.wa-icon{width:32px;height:32px;fill:currentColor}
+.wa-float{position:fixed;right:16px;bottom:16px;z-index:1000;width:58px;height:58px;border-radius:50%;background:#25d366;color:#fff;display:grid;place-items:center;box-shadow:0 12px 28px -10px #00000073;transition:transform .2s ease}
+.wa-float:hover{transform:scale(1.07)}
+@media(min-width:900px){.wa-float{right:24px;bottom:24px}}
