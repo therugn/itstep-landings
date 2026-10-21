@@ -6,7 +6,7 @@ import {fileURLToPath, pathToFileURL} from 'node:url';
 
 const SITES = fileURLToPath(new URL('../sites/', import.meta.url));
 const read = f => readFileSync(f, 'utf8');
-const loc = (pathname, search = '') => ({origin: 'https://astana.it-step.kz', pathname, search});
+const loc = (pathname, search = '') => ({host: 'astana.it-step.kz', pathname, search});
 
 /** Папки лендингов sites/<город>/<продукт> с index.html. */
 function landings() {
@@ -28,18 +28,17 @@ assert.ok(FIRST, 'нет ни одного sites/<город>/<продукт>/w
 const {buildWhatsAppUrl, landingPage} = await import(pathToFileURL(FIRST));
 const {CONVERSIONS, fireWhatsAppClick} = await import(pathToFileURL(FIRST.replace(/whatsapp\.js$/, 'conversion.js')));
 
-test('адрес страницы для сообщения: utm остаются, gclid и токен «Спасибо» уходят, слэш на конце', () => {
- assert.equal(landingPage(loc('/mka', '?utm_source=google&gclid=abc&utm_campaign=x')),
-              'https://astana.it-step.kz/mka/?utm_source=google&utm_campaign=x');
- assert.equal(landingPage(loc('/mka/spasibo/', '?t=abc')), 'https://astana.it-step.kz/mka/');
- assert.equal(landingPage(loc('/mka/')), 'https://astana.it-step.kz/mka/');
+test('адрес страницы для сообщения: только хост и путь, без схемы, меток и слэша на конце', () => {
+ assert.equal(landingPage(loc('/mka', '?utm_source=google&gclid=abc&utm_campaign=x')), 'astana.it-step.kz/mka');
+ assert.equal(landingPage(loc('/mka/spasibo/', '?t=abc')), 'astana.it-step.kz/mka');
+ assert.equal(landingPage(loc('/mka/')), 'astana.it-step.kz/mka');
 });
 
 test('ссылка wa.me: номер из настроек, адрес страницы в конце текста, не в начале', () => {
  const url = buildWhatsAppUrl(loc('/mka/', '?utm_campaign=x'), {phone: '77055353553', text: 'Здравствуйте! Хочу узнать о Малой академии.'});
  const u = new URL(url);
  assert.equal(u.origin + u.pathname, 'https://wa.me/77055353553');
- assert.equal(u.searchParams.get('text'), 'Здравствуйте! Хочу узнать о Малой академии. Пишу с сайта: https://astana.it-step.kz/mka/?utm_campaign=x');
+ assert.equal(u.searchParams.get('text'), 'Здравствуйте! Хочу узнать о Малой академии. Пишу с сайта astana.it-step.kz/mka');
 });
 
 test('конверсия клика WhatsApp: без ярлыка в gtag не уходит, с ярлыком уходит', () => {
@@ -61,12 +60,14 @@ test('копии whatsapp.js одинаковы на всех лендингах
  }
 });
 
-test('лендинг с whatsapp.js подключает скрипт и ставит кнопки на странице продукта и на «Спасибо»', () => {
+test('лендинг с whatsapp.js: на странице продукта скрипт и одна плавающая кнопка, на «Спасибо» кнопки нет', () => {
  for (const d of landings().filter(d => existsSync(`${d}/whatsapp.js`))) {
-  for (const page of [`${d}/index.html`, `${d}/spasibo/index.html`]) {
-   const html = read(page);
-   assert.match(html, /<script type="module" src="whatsapp\.js"><\/script>/, page);
-   assert.match(html, /<a [^>]*data-whatsapp[^>]*href="https:\/\/wa\.me\/7\d{10}"/, page);
-  }
+  const html = read(`${d}/index.html`);
+  assert.match(html, /<script type="module" src="whatsapp\.js"><\/script>/, d);
+  const buttons = html.match(/<a [^>]*data-whatsapp[^>]*>/g) || [];
+  assert.equal(buttons.length, 1, `${d}: ссылок data-whatsapp ${buttons.length}, нужна одна плавающая`);
+  assert.match(buttons[0], /class="wa-float"[^>]*href="https:\/\/wa\.me\/7\d{10}"/, d);
+  const thanks = read(`${d}/spasibo/index.html`);
+  assert.doesNotMatch(thanks, /data-whatsapp|whatsapp\.js/, `${d}/spasibo`);
  }
 });
