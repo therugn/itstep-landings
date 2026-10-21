@@ -25,7 +25,7 @@ function landings() {
 // Код одинаков на всех лендингах (проверяется ниже), поэтому поведение проверяем на первом найденном.
 const FIRST = landings().map(d => `${d}/whatsapp.js`).filter(existsSync)[0];
 assert.ok(FIRST, 'нет ни одного sites/<город>/<продукт>/whatsapp.js');
-const {buildWhatsAppUrl, landingPage} = await import(pathToFileURL(FIRST));
+const {buildWhatsAppUrl, clickPayload, landingPage, newCode, reportClick} = await import(pathToFileURL(FIRST));
 const {CONVERSIONS, fireWhatsAppClick} = await import(pathToFileURL(FIRST.replace(/whatsapp\.js$/, 'conversion.js')));
 
 test('адрес страницы для сообщения: только хост и путь, без схемы, меток и слэша на конце', () => {
@@ -34,11 +34,37 @@ test('адрес страницы для сообщения: только хос
  assert.equal(landingPage(loc('/mka/')), 'astana.it-step.kz/mka');
 });
 
-test('ссылка wa.me: номер из настроек, адрес страницы в конце текста, не в начале', () => {
- const url = buildWhatsAppUrl(loc('/mka/', '?utm_campaign=x'), {phone: '77055353553', text: 'Здравствуйте! Хочу узнать о Малой академии.'});
+test('ссылка wa.me: номер из настроек, адрес страницы с кодом клика в конце текста, не в начале', () => {
+ const url = buildWhatsAppUrl(loc('/mka/', '?utm_campaign=x'), {phone: '77055353553', text: 'Здравствуйте! Хочу узнать о Малой академии.'}, 'k7f3');
  const u = new URL(url);
  assert.equal(u.origin + u.pathname, 'https://wa.me/77055353553');
- assert.equal(u.searchParams.get('text'), 'Здравствуйте! Хочу узнать о Малой академии. Пишу с сайта astana.it-step.kz/mka');
+ assert.equal(u.searchParams.get('text'), 'Здравствуйте! Хочу узнать о Малой академии. Пишу с сайта astana.it-step.kz/mka/k7f3');
+});
+
+test('код клика: 4 знака без путающихся символов, каждый раз новый', () => {
+ const codes = new Set(Array.from({length: 50}, newCode));
+ for (const c of codes) assert.match(c, /^[abcdefghjkmnpqrstuvwxyz23456789]{4}$/, c);
+ assert.ok(codes.size > 40);
+});
+
+test('запись о клике: код, страница без меток, utm и идентификаторы кликов, ничего лишнего', () => {
+ const l = {host: 'astana.it-step.kz', origin: 'https://astana.it-step.kz', pathname: '/mka/',
+            search: '?utm_source=google&utm_campaign=x&gclid=G1&fbclid=F1&foo=bar'};
+ assert.deepEqual(clickPayload(l, 'k7f3'), {code: 'k7f3', page: 'https://astana.it-step.kz/mka/',
+                                            utm_source: 'google', utm_campaign: 'x', gclid: 'G1', fbclid: 'F1'});
+});
+
+test('отправка клика: keepalive, text/plain, JSON в теле; сбой сети глотается', async () => {
+ const calls = [];
+ const ok = await reportClick({code: 'k7f3'}, (url, init) => { calls.push([url, init]); return Promise.resolve({ok: true}); });
+ assert.equal(ok, true);
+ const [url, init] = calls[0];
+ assert.equal(url, 'https://api.it-step.kz/wa/click');
+ assert.equal(init.method, 'POST');
+ assert.equal(init.keepalive, true);
+ assert.equal(init.headers['Content-Type'], 'text/plain');
+ assert.deepEqual(JSON.parse(init.body), {code: 'k7f3'});
+ assert.equal(await reportClick({code: 'k7f3'}, () => Promise.reject(new Error('net'))), false);
 });
 
 test('конверсия клика WhatsApp: без ярлыка в gtag не уходит, с ярлыком уходит', () => {
