@@ -6,6 +6,8 @@
 |---|---|
 | `sites/test` | https://test.it-step.kz |
 | `sites/astana/mka` | https://astana.it-step.kz/mka |
+| `sites/almaty/rpo-ai` | https://almaty.it-step.kz/rpo-ai |
+| `sites/almaty/mka` | https://almaty.it-step.kz/mka |
 
 Сервер — VPS PS.kz в Алматы, выкладка — Coolify (https://coolify.it-step.kz).
 
