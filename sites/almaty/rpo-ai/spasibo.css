@@ -1,0 +1,26 @@
+/* Страница «Спасибо» РПО + AI: состояние задаёт data-state на body (checking | ok | used | none | error). */
+.thanks-page{min-height:100vh;display:grid;place-items:center;padding:24px 16px;background:var(--paper);color:var(--ink);font-family:var(--font)}
+.thanks{width:100%;max-width:560px}
+.thanks-logo{display:inline-flex;margin-bottom:24px}
+.thanks-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:40px 32px;text-align:center;box-shadow:0 14px 0 #f2effb}
+.badge{width:64px;height:64px;margin:0 auto 20px;color:var(--violet)}
+.badge svg{display:block;width:100%;height:100%}
+.badge-ring{stroke-dasharray:183;stroke-dashoffset:183;animation:ring .8s ease forwards}
+.badge-mark{stroke-dasharray:60;stroke-dashoffset:60;display:none}
+[data-state="ok"] .badge-check,[data-state="used"] .badge-check{display:block;animation:mark .5s ease .6s forwards}
+[data-state="used"] .badge{color:var(--blue)}
+[data-state="none"] .badge,[data-state="error"] .badge{color:#c0392b}
+[data-state="none"] .badge-alert,[data-state="error"] .badge-alert{display:block;animation:mark .5s ease .6s forwards}
+.thanks-card .eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0}
+.thanks-card h1{font-size:clamp(28px,5vw,40px);line-height:1.1;letter-spacing:-.04em;margin:12px 0}
+.thanks-card mark{background:linear-gradient(transparent 60%,var(--lavender) 60%);color:inherit}
+.thanks-card .lead{color:var(--muted);font-size:16px;line-height:1.5;margin:0}
+.steps{list-style:none;padding:0;margin:28px 0 0;text-align:left;display:grid;gap:12px}
+body:not([data-state="ok"]) .steps{display:none}
+.steps li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.4}
+.step-n{flex:0 0 28px;height:28px;border-radius:50%;background:#f0ebff;color:var(--violet);display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+.actions{display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:center;margin-top:28px}
+.phone-link{color:var(--ink);font-weight:700;text-decoration:none;white-space:nowrap}
+@keyframes ring{to{stroke-dashoffset:0}}
+@keyframes mark{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.badge-ring,.badge-mark{animation:none!important;stroke-dashoffset:0}}

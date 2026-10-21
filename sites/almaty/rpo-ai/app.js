@@ -1,3 +1,5 @@
+import { submitLead } from './lead.js';
+
 (() => {
   const menuButton = document.querySelector('.menu-toggle');
   const menu = document.querySelector('#mobile-nav');
@@ -132,7 +134,7 @@
       setError(consent, !consent.checked ? 'Подтвердите согласие на обработку данных.' : '');
       return form.querySelector('[aria-invalid="true"]');
     };
-    form.addEventListener('submit', event => {
+    form.addEventListener('submit', async event => {
       event.preventDefault();
       feedback.hidden = true;
       const invalid = validate();
@@ -140,7 +142,22 @@
         invalid.focus();
         return;
       }
-      feedback.textContent = 'Поля заполнены корректно. Это предварительная версия: данные не отправлены, запись на урок ещё не оформлена.';
+      // Отправка в приёмщик заявок (lead.js); при успехе — страница «Спасибо» с меткой, конверсии считаются там.
+      const submit = form.querySelector('button[type="submit"]');
+      const label = submit.textContent;
+      submit.disabled = true;
+      submit.setAttribute('aria-busy', 'true');
+      submit.textContent = 'Отправляем…';
+      const { name, phone, website } = form.elements;
+      const result = await submitLead({ name: name.value, phone: phone.value, consent: true, website: website ? website.value : '' });
+      if (result.ok && result.thanks) {
+        location.assign(new URL('spasibo/?t=' + encodeURIComponent(result.thanks), document.baseURI));
+        return;
+      }
+      submit.disabled = false;
+      submit.removeAttribute('aria-busy');
+      submit.textContent = label;
+      feedback.textContent = result.message;
       feedback.hidden = false;
     });
     form.addEventListener('input', event => {
