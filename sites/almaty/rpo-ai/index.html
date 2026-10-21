@@ -3,13 +3,16 @@
 <head>
   <meta charset="utf-8">
   <base href="/rpo-ai/">
+  <!-- Тег Google: конверсии Google Ads, ID общий для всех лендингов (см. README) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18503263063"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-18503263063');</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f7f7fc">
   <meta name="description" content="РПО + AI в Академии ШАГ в Алматы. Освойте разработку программного обеспечения с AI за 18 месяцев. Познакомьтесь с академией на пробном уроке.">
   <title>РПО + AI — программирование с искусственным интеллектом | Академия ШАГ</title>
   <link rel="icon" href="assets/step-dark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
-  <script src="app.js" defer></script>
+  <script type="module" src="app.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Перейти к содержимому</a>
@@ -39,8 +42,8 @@
           <div class="field"><label for="hero-name">Ваше имя <span aria-hidden="true">*</span></label><input id="hero-name" name="name" autocomplete="given-name" placeholder="Как к вам обращаться?" maxlength="80" required aria-describedby="hero-name-error"><span class="field-error" id="hero-name-error"></span></div>
           <div class="field"><label for="hero-phone">Номер телефона <span aria-hidden="true">*</span></label><input id="hero-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+7 (___) ___-__-__" maxlength="24" required aria-describedby="hero-phone-error"><span class="field-error" id="hero-phone-error"></span></div>
           <label class="consent"><input type="checkbox" name="consent" required checked aria-describedby="hero-consent-error"><span>Согласен(на) на обработку персональных данных согласно <a href="https://fsx1.itstep.org/api/v1/files/tEWf-PkBw8xZ1_A70fco5miibSh8aBlK?inline=true" target="_blank" rel="noopener noreferrer">политике конфиденциальности</a>.</span></label><span class="field-error" id="hero-consent-error"></span>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
           <button class="button button-primary" type="submit">Записаться на пробный урок</button>
-          <p class="form-note">Предварительный просмотр: отправка заявки пока не подключена.</p>
           <p class="form-feedback" role="status" aria-live="polite" hidden></p>
         </form>
       </div>
@@ -59,8 +62,8 @@
           <div class="field"><label for="approach-name">Ваше имя <span aria-hidden="true">*</span></label><input id="approach-name" name="name" autocomplete="given-name" placeholder="Как к вам обращаться?" maxlength="80" required aria-describedby="approach-name-error"><span class="field-error" id="approach-name-error"></span></div>
           <div class="field"><label for="approach-phone">Номер телефона <span aria-hidden="true">*</span></label><input id="approach-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+7 (___) ___-__-__" maxlength="24" required aria-describedby="approach-phone-error"><span class="field-error" id="approach-phone-error"></span></div>
           <label class="consent"><input type="checkbox" name="consent" required checked aria-describedby="approach-consent-error"><span>Согласен(на) на обработку персональных данных согласно <a href="https://fsx1.itstep.org/api/v1/files/tEWf-PkBw8xZ1_A70fco5miibSh8aBlK?inline=true" target="_blank" rel="noopener noreferrer">политике конфиденциальности</a>.</span></label><span class="field-error" id="approach-consent-error"></span>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
           <button class="button button-primary" type="submit">Записаться на пробный урок</button>
-          <p class="form-note">Предварительный просмотр: отправка заявки пока не подключена.</p>
           <p class="form-feedback" role="status" aria-live="polite" hidden></p>
         </form></div></div>
 </div></section>
