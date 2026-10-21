@@ -423,3 +423,9 @@ body{background-image:radial-gradient(ellipse 630px 470px at 100% 180px,#f548161
 
 .thanks-page{--paper:#171614;--ink:#f7f5ef;--font:Manrope,Arial,sans-serif;--violet:#ff8258;--blue:#ff8258;--lavender:#ff825840}
 .thanks-page .thanks-card{background:#22211f;box-shadow:none}.thanks-page .thanks-card .eyebrow{display:block}.thanks-page .button{justify-content:center}.thanks-page .step-n{background:#ff825825}.thanks-page .thanks-logo img{height:60px}
+
+/* Плавающая кнопка WhatsApp (whatsapp.js) */
+.wa-icon{width:32px;height:32px;fill:currentColor}
+.wa-float{position:fixed;right:16px;bottom:16px;z-index:1000;width:58px;height:58px;border-radius:50%;background:#25d366;color:#fff;display:grid;place-items:center;box-shadow:0 12px 28px -10px #00000073;transition:transform .2s ease}
+.wa-float:hover{transform:scale(1.07)}
+@media(min-width:900px){.wa-float{right:24px;bottom:24px}}
