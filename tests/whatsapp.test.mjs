@@ -2,9 +2,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {existsSync, readdirSync, readFileSync, statSync} from 'node:fs';
-import {fileURLToPath} from 'node:url';
-import {buildWhatsAppUrl, landingPage} from '../sites/astana/mka/whatsapp.js';
-import {CONVERSIONS, fireWhatsAppClick} from '../sites/astana/mka/conversion.js';
+import {fileURLToPath, pathToFileURL} from 'node:url';
 
 const SITES = fileURLToPath(new URL('../sites/', import.meta.url));
 const read = f => readFileSync(f, 'utf8');
@@ -23,6 +21,12 @@ function landings() {
  }
  return out;
 }
+
+// Код одинаков на всех лендингах (проверяется ниже), поэтому поведение проверяем на первом найденном.
+const FIRST = landings().map(d => `${d}/whatsapp.js`).filter(existsSync)[0];
+assert.ok(FIRST, 'нет ни одного sites/<город>/<продукт>/whatsapp.js');
+const {buildWhatsAppUrl, landingPage} = await import(pathToFileURL(FIRST));
+const {CONVERSIONS, fireWhatsAppClick} = await import(pathToFileURL(FIRST.replace(/whatsapp\.js$/, 'conversion.js')));
 
 test('адрес страницы для сообщения: utm остаются, gclid и токен «Спасибо» уходят, слэш на конце', () => {
  assert.equal(landingPage(loc('/mka', '?utm_source=google&gclid=abc&utm_campaign=x')),
@@ -49,7 +53,6 @@ test('конверсия клика WhatsApp: без ярлыка в gtag не �
 
 test('копии whatsapp.js одинаковы на всех лендингах, кроме строки настроек; номер — 11 цифр с 7', () => {
  const files = landings().map(d => `${d}/whatsapp.js`).filter(existsSync);
- assert.ok(files.length >= 1, 'нет ни одного whatsapp.js');
  const strip = s => s.replace(/^export const WHATSAPP = \{.*\};$/m, '');
  const ref = strip(read(files[0]));
  for (const f of files) {
