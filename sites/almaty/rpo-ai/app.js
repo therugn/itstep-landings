@@ -75,36 +75,127 @@ import { submitLead } from './lead.js';
     track.addEventListener('pointerleave', () => { if (drag && !drag.active) endDrag(); });
   });
 
+  const formatSwitcher = document.querySelector('[data-format-switcher]');
+  if (formatSwitcher) {
+    const track = formatSwitcher.querySelector('#format-track');
+    const cards = [...track.querySelectorAll('.format-folder')];
+    const pagination = formatSwitcher.querySelector('.format-pagination');
+    const dots = [...pagination.querySelectorAll('[data-format-index]')];
+    const status = formatSwitcher.querySelector('#format-status');
+    const mobile = window.matchMedia('(max-width: 680px)');
+    const before = cards[cards.length - 1].cloneNode(true);
+    const after = cards[0].cloneNode(true);
+    [before, after].forEach(clone => {
+      clone.dataset.formatClone = '';
+      clone.setAttribute('aria-hidden', 'true');
+      clone.inert = true;
+    });
+    track.prepend(before);
+    track.append(after);
+    let current = 0;
+    let settleTimer;
+    let frame;
+    let dragging;
+    const step = () => cards[0].getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 0);
+    const render = index => {
+      if (!Number.isFinite(index)) return;
+      current = (index + cards.length) % cards.length;
+      dots.forEach((dot, i) => dot.setAttribute('aria-pressed', String(i === current)));
+      const text = mobile.matches ? `Формат ${current + 1} из ${cards.length}: ${cards[current].querySelector('h3').textContent}` : '';
+      if (status.textContent !== text) status.textContent = text;
+    };
+    const jump = slot => track.scrollTo({ left: slot * step(), behavior: 'instant' });
+    const settle = () => {
+      if (!track.isConnected || !mobile.matches || dragging || step() <= 0) return;
+      const slot = Math.round(track.scrollLeft / step());
+      if (slot === 0) jump(cards.length);
+      else if (slot === cards.length + 1) jump(1);
+      render(slot - 1);
+    };
+    const go = index => {
+      if (!mobile.matches) return;
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      track.scrollTo({ left: (index + 1) * step(), behavior: reduced ? 'instant' : 'smooth' });
+    };
+    const layout = () => {
+      if (!track.isConnected) return;
+      clearTimeout(settleTimer);
+      before.hidden = after.hidden = !mobile.matches;
+      pagination.hidden = !mobile.matches;
+      track.tabIndex = mobile.matches ? 0 : -1;
+      if (mobile.matches) jump(current + 1);
+      else track.scrollLeft = 0;
+      render(current);
+    };
+    track.addEventListener('scroll', () => {
+      if (!track.isConnected || !mobile.matches || step() <= 0) return;
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => render(Math.round(track.scrollLeft / step()) - 1));
+      clearTimeout(settleTimer);
+      settleTimer = setTimeout(settle, 180);
+    }, { passive: true });
+    track.addEventListener('scrollend', settle);
+    dots.forEach((dot, i) => dot.addEventListener('click', () => go(i)));
+    track.addEventListener('keydown', event => {
+      if (!mobile.matches || event.target !== track || !['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+      event.preventDefault();
+      go(event.key === 'Home' ? 0 : event.key === 'End' ? cards.length - 1 : current + (event.key === 'ArrowLeft' ? -1 : 1));
+    });
+    track.addEventListener('pointerdown', event => {
+      if (!mobile.matches || event.pointerType !== 'mouse' || event.button !== 0) return;
+      dragging = { x: event.clientX, left: track.scrollLeft, id: event.pointerId };
+      track.setPointerCapture(event.pointerId);
+      track.classList.add('is-dragging');
+    });
+    track.addEventListener('pointermove', event => {
+      if (!dragging || event.pointerId !== dragging.id) return;
+      event.preventDefault();
+      track.scrollLeft = dragging.left + dragging.x - event.clientX;
+    });
+    const endDrag = () => {
+      if (!dragging) return;
+      dragging = null;
+      track.classList.remove('is-dragging');
+      go(current);
+    };
+    track.addEventListener('pointerup', endDrag);
+    track.addEventListener('pointercancel', endDrag);
+    track.addEventListener('lostpointercapture', endDrag);
+    mobile.addEventListener('change', layout);
+    window.addEventListener('resize', layout);
+    layout();
+  }
+
   const audienceSwitcher = document.querySelector('[data-audience-switcher]');
   if (audienceSwitcher) {
-    const cards = [...audienceSwitcher.querySelectorAll('.audience-picture')];
-    const next = audienceSwitcher.querySelector('.audience-next');
+    const track = audienceSwitcher.querySelector('#audience-track');
+    const cards = [...track.querySelectorAll('.audience-picture')];
     const pagination = audienceSwitcher.querySelector('.audience-pagination');
     const dots = [...pagination.children];
     const status = audienceSwitcher.querySelector('#audience-status');
     const mobile = window.matchMedia('(max-width: 680px)');
-    let current = 0;
-    const renderAudience = () => {
+    const update = () => {
+      const bounds = track.getBoundingClientRect();
+      let current = 0;
+      let distance = Infinity;
       cards.forEach((card, index) => {
-        const inactive = mobile.matches && index !== current;
-        card.classList.toggle('is-inactive', inactive);
-        card.inert = inactive;
-        if (inactive) card.setAttribute('aria-hidden', 'true');
-        else card.removeAttribute('aria-hidden');
+        const offset = Math.abs(card.getBoundingClientRect().left - bounds.left);
+        if (offset < distance) { distance = offset; current = index; }
       });
-      next.hidden = !mobile.matches;
       pagination.hidden = !mobile.matches;
+      track.tabIndex = mobile.matches ? 0 : -1;
       dots.forEach((dot, index) => dot.classList.toggle('is-active', index === current));
-      status.textContent = mobile.matches
-        ? `Карточка ${current + 1} из ${cards.length}: ${cards[current].querySelector('h3').textContent}`
-        : '';
+      const text = mobile.matches ? `Карточка ${current + 1} из ${cards.length}: ${cards[current].querySelector('h3').textContent}` : '';
+      if (status.textContent !== text) status.textContent = text;
     };
-    next.addEventListener('click', () => {
-      current = (current + 1) % cards.length;
-      renderAudience();
-    });
-    mobile.addEventListener('change', () => { current = 0; renderAudience(); });
-    renderAudience();
+    let frame;
+    track.addEventListener('scroll', () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(update);
+    }, { passive: true });
+    mobile.addEventListener('change', () => { track.scrollLeft = 0; update(); });
+    window.addEventListener('resize', update);
+    update();
   }
 
   document.querySelectorAll('[data-exclusive-accordion]').forEach(accordion => {
@@ -167,3 +258,4 @@ import { submitLead } from './lead.js';
     form.addEventListener('change', () => { feedback.hidden = true; });
   });
 })();
+
