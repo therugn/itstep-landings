@@ -73,6 +73,50 @@
     track.addEventListener('pointerleave', () => { if (drag && !drag.active) endDrag(); });
   });
 
+  const audienceSwitcher = document.querySelector('[data-audience-switcher]');
+  if (audienceSwitcher) {
+    const cards = [...audienceSwitcher.querySelectorAll('.audience-picture')];
+    const next = audienceSwitcher.querySelector('.audience-next');
+    const pagination = audienceSwitcher.querySelector('.audience-pagination');
+    const dots = [...pagination.children];
+    const status = audienceSwitcher.querySelector('#audience-status');
+    const mobile = window.matchMedia('(max-width: 680px)');
+    let current = 0;
+    const renderAudience = () => {
+      cards.forEach((card, index) => {
+        const inactive = mobile.matches && index !== current;
+        card.classList.toggle('is-inactive', inactive);
+        card.inert = inactive;
+        if (inactive) card.setAttribute('aria-hidden', 'true');
+        else card.removeAttribute('aria-hidden');
+      });
+      next.hidden = !mobile.matches;
+      pagination.hidden = !mobile.matches;
+      dots.forEach((dot, index) => dot.classList.toggle('is-active', index === current));
+      status.textContent = mobile.matches
+        ? `Карточка ${current + 1} из ${cards.length}: ${cards[current].querySelector('h3').textContent}`
+        : '';
+    };
+    next.addEventListener('click', () => {
+      current = (current + 1) % cards.length;
+      renderAudience();
+    });
+    mobile.addEventListener('change', () => { current = 0; renderAudience(); });
+    renderAudience();
+  }
+
+  document.querySelectorAll('[data-exclusive-accordion]').forEach(accordion => {
+    const cards = [...accordion.querySelectorAll('details')];
+    cards.forEach(card => {
+      card.addEventListener('toggle', () => {
+        if (card.open) cards.forEach(other => { if (other !== card) other.open = false; });
+      });
+      card.querySelector('.curriculum-content').addEventListener('click', event => {
+        if (!event.target.closest('a, button, input')) card.open = false;
+      });
+    });
+  });
+
   document.querySelectorAll('.signup-form').forEach(form => {
     const feedback = form.querySelector('.form-feedback');
     const setError = (input, message) => {
