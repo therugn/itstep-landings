@@ -4,10 +4,11 @@ export const PRODUCT = 'МКА';
 const TRACKING = /^(utm_[a-z_]+|gclid|yclid|fbclid)$/;
 
 /** Тело запроса приёмщику: поля формы + метки рекламы из адреса страницы. */
-export function buildPayload(data, loc = globalThis.location) {
+export function buildPayload(data, loc = globalThis.location, doc = globalThis.document) {
  const payload = {name:data.name.trim(), phone:data.phone.trim(), email:data.email?.trim() || '', product:PRODUCT,
   page_url:loc.href.split('#')[0], website:data.website || ''};
  if (data.ageLabel) payload.answer_age = data.ageLabel;
+ if (doc?.documentElement?.dataset?.h1) payload.h1 = doc.documentElement.dataset.h1;   // тест заголовка (headline.js)
  new URLSearchParams(loc.search).forEach((value, key) => { if (TRACKING.test(key)) payload[key] = value; });
  return payload;
 }
