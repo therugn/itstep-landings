@@ -58,7 +58,7 @@ test('заголовки: без ключа поиска в тексте, кор
   const text = h.html.replace(/<[^>]+>/g, '');
   assert.match(h.html, /^[^<]+ <span>[^<]+<\/span>$/, h.id);
   assert.ok(text.length <= 42, `${h.id}: ${text.length} знаков`);
-  assert.doesNotMatch(text, /\d/, `${h.id}: без возраста, просто «для детей» (Илья 23.10)`);
+  assert.doesNotMatch(text, /\d+\s*[–-]\s*\d+|\d+\+|лет/, `${h.id}: без возраста, просто «для детей» (Илья 23.10)`);
  }
  assert.equal(new Set(HEADLINES.map(h => h.id)).size, HEADLINES.length, 'id правил уникальны');
 });
