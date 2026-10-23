@@ -58,6 +58,7 @@ test('заголовки: без ключа поиска в тексте, кор
   const text = h.html.replace(/<[^>]+>/g, '');
   assert.match(h.html, /^[^<]+ <span>[^<]+<\/span>$/, h.id);
   assert.ok(text.length <= 42, `${h.id}: ${text.length} знаков`);
+  assert.doesNotMatch(text, /\d/, `${h.id}: без возраста, просто «для детей» (Илья 23.10)`);
  }
  assert.equal(new Set(HEADLINES.map(h => h.id)).size, HEADLINES.length, 'id правил уникальны');
 });
@@ -70,8 +71,8 @@ test('вариант kw подменяет H1 и title, base оставляет 
  fakeDoc.h1 = {innerHTML: 'Малая компьютерная <span>академия ШАГ</span>'};
  const doc = fakeDoc();
  assert.equal(applyHeadline(doc, q('python для детей'), 'kw'), 'kw:python');
- assert.equal(fakeDoc.h1.innerHTML, 'Python <span>для детей 9–14 лет</span>');
- assert.equal(doc.title, 'Python для детей 9–14 лет — Академия ШАГ в Астане');
+ assert.equal(fakeDoc.h1.innerHTML, 'Python <span>для детей</span>');
+ assert.equal(doc.title, 'Python для детей — Академия ШАГ в Астане');
 
  fakeDoc.h1 = {innerHTML: 'Малая компьютерная <span>академия ШАГ</span>'};
  const base = fakeDoc();

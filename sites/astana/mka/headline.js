@@ -12,13 +12,13 @@ export const HEADLINES = [
  {id: '3d-courses', test: /(курс|обучен).*(3d|3д)/, html: 'Курсы 3D‑моделирования <span>для детей</span>'},
  {id: '3d', test: /3d|3д|моделир/, html: '3D‑моделирование <span>для детей</span>'},
  {id: 'games', test: /игр/, html: 'Создание игр <span>для детей</span>'},
- {id: 'python', test: /python|питон|пайтон/, html: 'Python <span>для детей 9–14 лет</span>'},
- {id: 'scratch', test: /scratch|скретч/, html: 'Scratch <span>для детей 7–8 лет</span>'},
+ {id: 'python', test: /python|питон|пайтон/, html: 'Python <span>для детей</span>'},
+ {id: 'scratch', test: /scratch|скретч/, html: 'Scratch <span>для детей</span>'},
  {id: 'teens', test: /подрост/, html: 'IT‑курсы <span>для подростков</span>'},
  {id: 'programming-courses', test: /курс.*программ/, html: 'Курсы программирования <span>для детей</span>'},
  {id: 'programming', test: /программир/, html: 'Программирование <span>для детей</span>'},
- {id: 'it', test: /(^|\s)(it|ит)(\s|$)|айти|it-|ит-/, html: 'IT‑курсы <span>для детей 7–14 лет</span>'},
- {id: 'clubs', test: /кружок|кружк/, html: 'IT‑кружки <span>для детей 7–14 лет</span>'},
+ {id: 'it', test: /(^|\s)(it|ит)(\s|$)|айти|it-|ит-/, html: 'IT‑курсы <span>для детей</span>'},
+ {id: 'clubs', test: /кружок|кружк/, html: 'IT‑кружки <span>для детей</span>'},
 ];
 
 // Бренды конкурентов и наш: такие ключи всегда ведут на стандартный H1.
