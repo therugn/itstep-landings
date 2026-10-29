@@ -5,7 +5,7 @@
  *  строкой, его загрузчик — в <head>. */
 export const CONVERSIONS = {
  googleAdsSendTo: 'AW-18503263063/UEWhCISjr6IdENfGhfdE',   // «Заявка с лендинга», MCC IT STEP KZ 963-955-5901
- whatsappSendTo: '',                                      // «Клик WhatsApp» — ярлык действия в том же MCC; пусто = клики в Google Ads не уходят
+ whatsappSendTo: 'AW-18503263063/25MWCKSrq64dENfGhfdE',    // «Клик WhatsApp», MCC IT STEP KZ, вторичная (создана 29.10.2026)
  yandexCounter: 0,                                        // номер счётчика Метрики, когда появится
  yandexGoal: 'lead'
 };
