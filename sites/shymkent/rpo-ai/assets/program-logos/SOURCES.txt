@@ -1,0 +1,30 @@
+Logos copied from https://almaty.itstep.org/programmer on 2026-10-20.
+Inline SVGs are extracted from the original page; image URLs below belong to the original course assets.
+
+HTML5: inline SVG in original page
+CSS3: inline SVG in original page
+JavaScript: inline SVG in original page
+React: inline SVG in original page
+Python: https://almaty.itstep.org/dist/images/courses-adult/pko-new/rpo/python.png
+SQL: inline SVG in original page
+FastAPI: https://almaty.itstep.org/dist/images/courses-adult/pko-new/rpo/fastapi.png
+LLM APIs: https://almaty.itstep.org/dist/images/courses-adult/pko-new/rpo/llm-apis.svg
+Docker: inline SVG in original page
+Git: inline SVG in original page
+Chroma: https://almaty.itstep.org/dist/images/courses-adult/pko-new/rpo/chroma.png
+Kubernetes: inline SVG in original page
+GitHub: https://almaty.itstep.org/dist/images/courses-adult/pko-new/rpo/GitHub.png
+GitHub Copilot: https://almaty.itstep.org/dist/images/courses-adult/pko-new/rpo/GitHub.png
+Claude Code: https://almaty.itstep.org/dist/images/courses-adult/pko-new/rpo/claude.svg
+Cursor: https://almaty.itstep.org/dist/images/courses-adult/pko-new/rpo/cursor.svg
+Azure: inline SVG in original page
+GCP: https://almaty.itstep.org/dist/images/courses-adult/pko-new/rpo/gcp.png
+AWS: https://almaty.itstep.org/dist/images/courses-adult/pko-new/rpo/aws.svg
+Pinecone: https://almaty.itstep.org/dist/images/courses-adult/pko-new/rpo/pinecone.svg
+pgvector: https://almaty.itstep.org/dist/images/courses-adult/pko-new/rpo/postgres.png
+PostgreSQL: https://almaty.itstep.org/dist/images/courses-adult/pko-new/rpo/postgres.png
+RAG: text-only label in original page
+Microsoft Azure: inline SVG in original page
+AWS: https://almaty.itstep.org/dist/images/courses-adult/pko-new/rpo/aws.svg
+Google Cloud: https://almaty.itstep.org/dist/images/courses-adult/pko-new/rpo/gcp.png
+Anthropic Claude: https://almaty.itstep.org/dist/images/courses-adult/pko-new/rpo/claude.svg
