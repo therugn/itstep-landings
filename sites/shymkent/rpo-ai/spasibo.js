@@ -1,9 +1,9 @@
 import {fireConversions} from './conversion.js';
 
 const CONFIRM_URL = 'https://api.it-step.kz/lead/confirm?t=';
-const PHONE = '+7 (771) 083‑33‑83';   // неразрывные дефисы, чтобы номер не рвался при переносе строки
+const PHONE = '+7 (771) 083‑33‑83';   // неразрывные дефисы, чтобы номер не рвался при переносе строки
 export const TEXTS = {
- ok: ['РПО + AI · Академия ШАГ', 'Ура, <mark>заявка принята</mark>!', 'Мы получили вашу заявку и скоро свяжемся, чтобы пригласить на пробный урок.'],
+ ok: ['РПО + AI · Шымкент', 'Ура, <mark>заявка принята</mark>!', 'Мы получили вашу заявку и скоро свяжемся, чтобы пригласить на пробный урок.'],
  used: ['Всё в порядке', 'Заявка <mark>уже у нас</mark>', 'Эта страница уже открывалась, повторно отправлять заявку не нужно. Мы свяжемся с вами.'],
  none: ['Что-то пошло не так', 'Не нашли <mark>вашу заявку</mark>', 'Откройте сайт и отправьте форму ещё раз или позвоните в академию: ' + PHONE + '.'],
  error: ['Проверка не удалась', 'Не удалось <mark>проверить заявку</mark>', 'Если вы только что отправили форму, мы её получили. Для уверенности позвоните: ' + PHONE + '.']
@@ -26,7 +26,7 @@ export function render(state, doc = globalThis.document) {
  doc.getElementById('eyebrow').textContent = eyebrow;
  doc.getElementById('title').innerHTML = title;            // разметка только из констант выше
  doc.getElementById('text').textContent = text;
- doc.title = state === 'ok' ? 'Заявка принята — РПО + AI | Академия ШАГ' : 'РПО + AI | Академия ШАГ';
+ doc.title = state === 'ok' ? 'Заявка принята — РПО + AI | Академия ШАГ, Шымкент' : 'РПО + AI | Академия ШАГ, Шымкент';
 }
 
 if (typeof document !== 'undefined' && document.getElementById('title')) {

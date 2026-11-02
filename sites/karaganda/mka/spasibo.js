@@ -2,9 +2,9 @@ import {fireConversions} from './conversion.js';
 import {startConfetti} from './confetti.js';
 
 const CONFIRM_URL = 'https://api.it-step.kz/lead/confirm?t=';
-const PHONE = '+7 (705) 957‑51‑50';   // неразрывно, чтобы номер не рвался при переносе строки
+const PHONE = '+7 (777) 555‑59‑95';   // неразрывно, чтобы номер не рвался при переносе строки
 export const TEXTS = {
- ok: ['Молодец — первый шаг сделан!', 'Ура, <mark>заявка принята</mark>!', 'Мы уже получили вашу заявку и скоро свяжемся, чтобы записать на пробный урок.'],
+ ok: ['Малая компьютерная академия · Караганда', 'Ура, <mark>заявка принята</mark>!', 'Мы уже получили вашу заявку и скоро свяжемся, чтобы записать на пробный урок.'],
  used: ['Всё в порядке', 'Заявка <mark>уже у нас</mark>', 'Эта страница уже открывалась, повторно отправлять заявку не нужно. Мы свяжемся с вами.'],
  none: ['Что-то пошло не так', 'Не нашли <mark>вашу заявку</mark>', 'Откройте сайт и отправьте форму ещё раз или позвоните в академию: ' + PHONE + '.'],
  error: ['Проверка не удалась', 'Не удалось <mark>проверить заявку</mark>', 'Если вы только что отправили форму, мы её получили. Для уверенности позвоните: ' + PHONE + '.']
@@ -27,7 +27,7 @@ export function render(state, doc = globalThis.document) {
  doc.getElementById('eyebrow').textContent = eyebrow;
  doc.getElementById('title').innerHTML = title;            // разметка только из констант выше
  doc.getElementById('text').textContent = text;
- doc.title = state === 'ok' ? 'Заявка принята — Академия ШАГ' : 'Академия ШАГ';
+ doc.title = state === 'ok' ? 'Заявка принята — Малая компьютерная академия | Академия ШАГ, Караганда' : 'Малая компьютерная академия | Академия ШАГ, Караганда';
 }
 
 if (typeof document !== 'undefined' && document.getElementById('title')) {
