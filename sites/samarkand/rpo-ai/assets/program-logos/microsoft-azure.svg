@@ -1,0 +1,14 @@
+<svg class="career-result__tools-img" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <g clip-path="url(#clip0_511_14287)">
+                                        <path d="M0 0H24V24H0V0Z" fill="#F7F7F9"/>
+                                        <path d="M4.5 4.49982H11.6429V11.6427H4.5V4.49982Z" fill="#F35325"/>
+                                        <path d="M12.3594 4.49991H19.5022V11.6428H12.3594V4.49991Z" fill="#81BC06"/>
+                                        <path d="M4.5 12.3573H11.6429V19.5002H4.5V12.3573Z" fill="#05A6F0"/>
+                                        <path d="M12.3594 12.3573H19.5022V19.5002H12.3594V12.3573Z" fill="#FFBA08"/>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_511_14287">
+                                            <rect width="24" height="24" rx="12" fill="white"/>
+                                        </clipPath>
+                                    </defs>
+                                </svg>
