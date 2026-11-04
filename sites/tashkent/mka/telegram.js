@@ -1,11 +1,11 @@
-/** Плавающая кнопка WhatsApp: ссылка `a[data-whatsapp]` ведёт в чат с номером города в Wazzup (первым отвечает ЕЦПЗ).
- *  В конец первого сообщения дописывается адрес страницы с кодом клика: astana.it-step.kz/mka/k7f3. Тот же код вместе
- *  с метками рекламы (utm, gclid) уходит в приёмщик заявок, и сквозная аналитика (конекторы/analytics) по коду из первого
- *  сообщения находит кампанию. Адрес не в начале текста — иначе Wazzup его не разберёт. Номер — канал Wazzup города,
- *  не телефон филиала. Меняется только строка WHATSAPP; остальное одинаково на всех лендингах (tests/whatsapp.test.mjs). */
+/** Плавающая кнопка Telegram (Узбекистан: филиал ведёт клиентов в Telegram, решение Ильи 04.11.2026).
+ *  Ссылка `a[data-telegram]` открывает чат Ташкента t.me/<username> с готовым текстом; в конце текста адрес страницы
+ *  с кодом клика: tashkent.stepacademy.uz/mka/k7f3. Тот же код вместе с метками рекламы уходит в приёмщик заявок
+ *  (тот же /wa/click, что у WhatsApp), и по коду из первого сообщения находится кампания.
+ *  Меняется только строка TELEGRAM (tests/telegram.test.mjs). */
 import {fireWhatsAppClick} from './conversion.js';
 
-export const WHATSAPP = {phone: '998555883343', text: 'Здравствуйте! Хочу узнать о Малой компьютерной академии IT STEP.'};
+export const TELEGRAM = {username: 'itstep_tg_manager', text: 'Здравствуйте! Хочу узнать о Малой компьютерной академии IT STEP.'};
 export const CLICK_ENDPOINT = 'https://api.it-step.kz/wa/click';   // приёмщик заявок: запись клика (код, страница, метки)
 const TRACKING = /^(utm_[a-z_]+|gclid|yclid|fbclid)$/;
 const ALPHABET = 'abcdefghjkmnpqrstuvwxyz23456789';               // без 0/1/i/l/o: код читают глазами
@@ -22,9 +22,9 @@ export function landingPage(loc = globalThis.location) {
  return loc.host + loc.pathname.replace(/\/spasibo\/?$/, '/').replace(/\/+$/, '');
 }
 
-export function buildWhatsAppUrl(loc = globalThis.location, config = WHATSAPP, code = '') {
+export function buildTelegramUrl(loc = globalThis.location, config = TELEGRAM, code = '') {
  const page = landingPage(loc) + (code ? '/' + code : '');
- return `https://wa.me/${config.phone}?text=${encodeURIComponent(`${config.text} Пишу с сайта ${page}`)}`;
+ return `https://t.me/${config.username}?text=${encodeURIComponent(`${config.text} Пишу с сайта ${page}`)}`;
 }
 
 /** Запись о клике для приёмщика: код, страница без меток, метки рекламы из адреса. Без персональных данных. */
@@ -34,7 +34,7 @@ export function clickPayload(loc = globalThis.location, code) {
  return payload;
 }
 
-/** keepalive и text/plain: запрос уходит без preflight и доживает переход в WhatsApp; сбой сети не мешает клику. */
+/** keepalive и text/plain: запрос уходит без preflight и доживает переход в Telegram; сбой сети не мешает клику. */
 export async function reportClick(payload, transport = fetch, endpoint = CLICK_ENDPOINT) {
  try {
   const response = await transport(endpoint, {method: 'POST', keepalive: true, headers: {'Content-Type': 'text/plain'}, body: JSON.stringify(payload)});
@@ -46,8 +46,8 @@ export async function reportClick(payload, transport = fetch, endpoint = CLICK_E
 
 if (typeof document !== 'undefined') {
  const code = newCode();
- document.querySelectorAll('a[data-whatsapp]').forEach(link => {
-  link.href = buildWhatsAppUrl(globalThis.location, WHATSAPP, code);
+ document.querySelectorAll('a[data-telegram]').forEach(link => {
+  link.href = buildTelegramUrl(globalThis.location, TELEGRAM, code);
   link.target = '_blank';
   link.rel = 'noopener';
   link.addEventListener('click', () => { reportClick(clickPayload(globalThis.location, code)); fireWhatsAppClick(); });
