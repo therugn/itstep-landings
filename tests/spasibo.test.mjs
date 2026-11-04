@@ -7,9 +7,9 @@ import {fileURLToPath} from 'node:url';
 
 const SITES = fileURLToPath(new URL('../sites/', import.meta.url));
 // Новый город или продукт — строка здесь; без неё тест упадёт и напомнит.
-const CITY = {astana: 'Астана', almaty: 'Алматы', shymkent: 'Шымкент', karaganda: 'Караганда', tashkent: 'Ташкент'};
+const CITY = {astana: 'Астана', almaty: 'Алматы', shymkent: 'Шымкент', karaganda: 'Караганда', tashkent: 'Ташкент', samarkand: 'Самарканд'};
 // Бренд по стране: Узбекистан — IT STEP Academy, Казахстан — Академия ШАГ.
-const UZ = new Set(['tashkent']);
+const UZ = new Set(['tashkent', 'samarkand']);
 const PRODUCT = {mka: 'Малая компьютерная академия', 'rpo-ai': 'РПО + AI', 'design-ai': 'Дизайн + AI'};
 
 const digits = s => s.replace(/\D/g, '');
