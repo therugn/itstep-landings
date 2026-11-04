@@ -76,13 +76,13 @@ test('конверсия клика WhatsApp: без ярлыка в gtag не �
  assert.deepEqual(calls, [['event', 'conversion', {send_to: 'AW-1/abc'}]]);
 });
 
-test('копии whatsapp.js одинаковы на всех лендингах, кроме строки настроек; номер — 11 цифр с 7', () => {
+test('копии whatsapp.js одинаковы на всех лендингах, кроме строки настроек; номер — 7 + 10 цифр (КЗ) или 998 + 9 цифр (УЗ)', () => {
  const files = landings().map(d => `${d}/whatsapp.js`).filter(existsSync);
  const strip = s => s.replace(/^export const WHATSAPP = \{.*\};$/m, '');
  const ref = strip(read(files[0]));
  for (const f of files) {
   assert.equal(strip(read(f)), ref, `отличается от ${files[0]}: ${f}`);
-  assert.match(read(f), /^export const WHATSAPP = \{phone: '7\d{10}', text: '[^']+'\};$/m, f);
+  assert.match(read(f), /^export const WHATSAPP = \{phone: '(?:7\d{10}|998\d{9})', text: '[^']+'\};$/m, f);
  }
 });
 
@@ -92,7 +92,7 @@ test('лендинг с whatsapp.js: на странице продукта ск
   assert.match(html, /<script type="module" src="whatsapp\.js"><\/script>/, d);
   const buttons = html.match(/<a [^>]*data-whatsapp[^>]*>/g) || [];
   assert.equal(buttons.length, 1, `${d}: ссылок data-whatsapp ${buttons.length}, нужна одна плавающая`);
-  assert.match(buttons[0], /class="wa-float"[^>]*href="https:\/\/wa\.me\/7\d{10}"/, d);
+  assert.match(buttons[0], /class="wa-float"[^>]*href="https:\/\/wa\.me\/(?:7\d{10}|998\d{9})"/, d);
   const thanks = read(`${d}/spasibo/index.html`);
   assert.doesNotMatch(thanks, /data-whatsapp|whatsapp\.js/, `${d}/spasibo`);
  }
