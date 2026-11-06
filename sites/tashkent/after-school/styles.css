@@ -369,3 +369,4 @@
 @media(min-width:900px){.wa-float{right:24px;bottom:24px}}
 .tg-float{background:#229ed9}
 .logo-step{width:49px;height:56px}
+svg[hidden]{display:none}

@@ -368,3 +368,4 @@ body[data-contacts="archived"] :is(.site-footer,#contacts){display:none!importan
 .wa-float:hover{transform:scale(1.07)}
 .wa-float .wa-icon{width:30px;height:30px;fill:currentColor}
 @media(min-width:900px){.wa-float{right:24px;bottom:24px}}
+svg[hidden]{display:none}
