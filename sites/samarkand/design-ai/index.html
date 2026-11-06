@@ -13,8 +13,11 @@
   <link rel="icon" href="assets/brand/itstep-logo.svg" type="image/svg+xml">
   <link rel="preload" href="assets/fonts/manrope-cyrillic-800-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/images/hero.webp" as="image">
+  <!-- Заголовок под ключ из поиска (headline.js): пока скрипт не отработал, H1 скрыт; не дольше 1,5 с -->
+  <style>.h1-wait #hero-title{visibility:hidden}</style>
+  <script>if(/[?&]utm_term=/.test(location.search)){document.documentElement.classList.add('h1-wait');setTimeout(function(){document.documentElement.classList.remove('h1-wait')},1500)}</script>
   <link rel="stylesheet" href="styles.css">
-  <script type="module" src="app.js"></script>
+  <script type="module" src="headline.js"></script><script type="module" src="app.js"></script>
   
 </head>
 <body>
