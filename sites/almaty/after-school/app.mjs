@@ -1,4 +1,5 @@
 import {getSchedule} from './schedule.mjs?v=20261103';
+import {validateLead,submitLead} from './lead.js';
 
 let shift = 'afternoon';
 let group = 1;
@@ -83,7 +84,6 @@ function showContacts() {
  ]);
 }
 document.querySelectorAll('[data-contact]').forEach(button=>button.addEventListener('click',showContacts));
-document.querySelectorAll('[data-whatsapp]').forEach(button=>button.addEventListener('click',()=>showInfo('WhatsApp',['+7 (705) 593-63-95'])));
 dialog.addEventListener('close',()=>{
  document.body.classList.remove('modal-open');
  if(returnFocus?.isConnected) returnFocus.focus({preventScroll:true});
@@ -94,23 +94,32 @@ dialog.addEventListener('click',event=>{
  if(event.clientX<bounds.left||event.clientX>bounds.right||event.clientY<bounds.top||event.clientY>bounds.bottom) dialog.close();
 });
 
+// Заявка уходит в приёмщик (lead.js): CRM филиала + журнал + Telegram; после подтверждения — страница «Спасибо».
 document.querySelectorAll('.consultation-form').forEach(form=>{
 const phone = form.querySelector('[name=phone]');
 const parentName = form.querySelector('[name=parentName]');
-phone.addEventListener('input',()=>{
- phone.setCustomValidity('');
-});
-phone.addEventListener('change',()=>{
- const digits=phone.value.replace(/\D/g,'');
- phone.setCustomValidity(digits.length>=10&&digits.length<=15?'':'Укажите номер телефона полностью.');
-});
-parentName.addEventListener('input',()=>parentName.setCustomValidity(parentName.value.trim()?'':'Укажите имя родителя.'));
-form.addEventListener('submit',event=>{
+const consent = form.querySelector('[name=consent]');
+const status = form.querySelector('.form-status');
+const submit = form.querySelector('[type=submit]');
+phone.addEventListener('input',()=>phone.setCustomValidity(''));
+parentName.addEventListener('input',()=>parentName.setCustomValidity(''));
+form.addEventListener('submit',async event=>{
  event.preventDefault();
- const digits=phone.value.replace(/\D/g,'');
- phone.setCustomValidity(digits.length>=10&&digits.length<=15?'':'Укажите номер телефона полностью.');
- parentName.setCustomValidity(parentName.value.trim()?'':'Укажите имя родителя.');
- if(form.reportValidity()) showContacts();
+ const data = {name:parentName.value, phone:phone.value, consent:consent.checked, website:form.elements.website?.value||''};
+ const errors = validateLead(data);
+ parentName.setCustomValidity(errors.name||'');
+ phone.setCustomValidity(errors.phone||'');
+ consent.setCustomValidity(errors.consent||'');
+ if(!form.reportValidity()) return;
+ submit.disabled = true;
+ status.className = 'form-status';
+ status.textContent = 'Отправляем заявку…';
+ const result = await submitLead(data);
+ submit.disabled = false;
+ status.textContent = result.message;
+ if(result.ok) status.classList.add('success');
+ if(result.ok && result.thanks){location.assign(new URL('spasibo/?t='+encodeURIComponent(result.thanks),document.baseURI));return;}
+ status.focus({preventScroll:true});
 });
 });
 

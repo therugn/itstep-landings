@@ -4,15 +4,20 @@
  <meta charset="utf-8">
  <base href="/after-school/">
  <meta name="viewport" content="width=device-width, initial-scale=1">
+ <!-- Тег Google: конверсии Google Ads, ID общий для всех лендингов (см. README) -->
+ <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18503263063"></script>
+ <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-18503263063');</script>
  <meta name="theme-color" content="#ffffff">
  <title>IT-продлёнка Академии ШАГ — Алматы</title>
  <meta name="description" content="Группа продлённого дня с IT и английским для 1–6 классов в Алматы. После школы - к нам. Уроки сделаны, вечер - для семьи.">
  <link rel="preload" href="assets/gilroy-500.woff2" as="font" type="font/woff2" crossorigin>
  <link rel="preload" href="assets/gilroy-900.woff2" as="font" type="font/woff2" crossorigin>
- <link rel="stylesheet" href="styles.css?v=contacts-archived-almaty-20261105">
- <script type="module" src="app.mjs?v=selected-edits-20261103"></script>
+ <link rel="stylesheet" href="styles.css?v=20261106">
+ <script type="module" src="app.mjs?v=20261106"></script>
+ <script type="module" src="whatsapp.js"></script>
 </head>
-<body data-contacts="archived">
+<body data-contacts="active">
+ <svg hidden aria-hidden="true"><symbol id="wa-icon" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></symbol></svg>
  <header class="header container">
   <a class="brand" href="#top" aria-label="Академия ШАГ и Astana Hub — в начало страницы">
    <img class="logo-step" src="assets/step.svg" alt="Академия ШАГ" width="87" height="93">
@@ -33,6 +38,8 @@
       <div><label for="hero-parent-name">Имя родителя</label><input id="hero-parent-name" name="parentName" type="text" autocomplete="given-name" maxlength="100" required></div>
       <div><label for="hero-phone">Телефон</label><input id="hero-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="25" required></div>
      </div>
+     <div class="hp-field" aria-hidden="true"><label>Сайт<input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
+     <p class="form-status" role="status" tabindex="-1"></p>
      <button class="button submit" type="submit">Записаться</button>
      <label class="consent"><input id="hero-consent" name="consent" type="checkbox" required checked><span>Согласен(на) на обработку персональных данных согласно <a href="https://almaty.itstep.org/privacy.pdf" target="_blank" rel="noopener noreferrer">политике конфиденциальности</a></span></label>
     </form>
@@ -181,6 +188,8 @@
       <div><label for="parent-name">Имя родителя</label><input id="parent-name" name="parentName" type="text" autocomplete="given-name" maxlength="100" required></div>
       <div><label for="phone">Телефон</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="25" required></div>
      </div>
+     <div class="hp-field" aria-hidden="true"><label>Сайт<input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
+     <p class="form-status" role="status" tabindex="-1"></p>
      <button class="button submit" type="submit">Записаться</button>
      <label class="consent"><input id="consent" name="consent" type="checkbox" required checked><span>Согласен(на) на обработку персональных данных согласно <a href="https://almaty.itstep.org/privacy.pdf" target="_blank" rel="noopener noreferrer">политике конфиденциальности</a></span></label>
     </form>
@@ -189,6 +198,8 @@
 
 
  </main>
+ <a class="wa-float" data-whatsapp href="https://wa.me/77059921014" aria-label="Написать в WhatsApp"><svg class="wa-icon" aria-hidden="true"><use href="#wa-icon"/></svg></a>
+  <footer class="site-footer" id="contacts" aria-labelledby="contacts-title"><div class="container"><h2 id="contacts-title">Контакты</h2><div class="footer-branches"><div class="footer-branch"><address>г. Алматы, Коктем-3, дом 16а</address><a href="tel:+77059575150">+7 (705) 957-51-50</a><a href="tel:+77055936395">+7 (705) 593-63-95</a><a href="mailto:welcome@itstep.org">welcome@itstep.org</a><p>Пн–Сб 09:30–19:00; Вс 10:00–18:00</p><a class="footer-whatsapp" href="https://wa.me/77059921014" target="_blank" rel="noopener noreferrer">WhatsApp</a><div class="footer-education"><span>Учебная часть</span><a href="tel:+77055936395">+7 (705) 593-63-95</a><p>Пн–Пт 09:00–20:00; Сб–Вс 09:00–19:00</p></div></div><div class="footer-branch"><address>г. Алматы, улица Байсеитовой, 45</address><a href="tel:+77059575150">+7 (705) 957-51-50</a><a href="tel:+77055936395">+7 (705) 593-63-95</a><a href="mailto:welcome@itstep.org">welcome@itstep.org</a><p>Пн–Сб 09:30–19:00; Вс 10:00–18:00</p><a class="footer-whatsapp" href="https://wa.me/77059921014" target="_blank" rel="noopener noreferrer">WhatsApp</a><div class="footer-education"><span>Учебная часть</span><a href="tel:+77055936395">+7 (705) 593-63-95</a><p>Пн–Пт 09:00–20:00; Сб–Вс 09:00–19:00</p></div></div></div></div></footer>
  <dialog id="info-dialog" aria-labelledby="dialog-title"><div class="dialog-content"><h2 id="dialog-title">Контакты</h2><div id="dialog-body"></div><form method="dialog"><button class="button button-outline dialog-close" autofocus>Закрыть</button></form></div></dialog>
 </body>
 </html>

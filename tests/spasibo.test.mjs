@@ -7,10 +7,10 @@ import {fileURLToPath} from 'node:url';
 
 const SITES = fileURLToPath(new URL('../sites/', import.meta.url));
 // Новый город или продукт — строка здесь; без неё тест упадёт и напомнит.
-const CITY = {astana: 'Астана', almaty: 'Алматы', shymkent: 'Шымкент', karaganda: 'Караганда', tashkent: 'Ташкент', samarkand: 'Самарканд'};
+const CITY = {astana: 'Астана', almaty: 'Алматы', shymkent: 'Шымкент', karaganda: 'Караганда', uralsk: 'Уральск', temirtau: 'Темиртау', tashkent: 'Ташкент', samarkand: 'Самарканд'};
 // Бренд по стране: Узбекистан — IT STEP Academy, Казахстан — Академия ШАГ.
 const UZ = new Set(['tashkent', 'samarkand']);
-const PRODUCT = {mka: 'Малая компьютерная академия', 'rpo-ai': 'РПО + AI', 'design-ai': 'Дизайн + AI'};
+const PRODUCT = {mka: 'Малая компьютерная академия', 'rpo-ai': 'РПО + AI', 'design-ai': 'Дизайн + AI', 'after-school': 'IT-продлёнка'};
 
 const digits = s => s.replace(/\D/g, '');
 const pages = readdirSync(SITES).flatMap(c => readdirSync(join(SITES, c), {withFileTypes: true})

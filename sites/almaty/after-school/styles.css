@@ -331,3 +331,39 @@
 
 /* Temporary contact archive: set body data-contacts to active to restore. */
 body[data-contacts="archived"] :is(.site-footer,#contacts){display:none!important}
+/* City contact footer follows the supplied dark reference. */
+.site-footer{margin-top:80px;background:#101115;padding:46px 0 54px;color:#a9abb2}
+.site-footer h2{color:#fff;font-size:18px;font-weight:700;line-height:1.3;letter-spacing:0;margin:0 0 24px;text-wrap:wrap}
+.footer-branches{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:38px;max-width:800px}
+.footer-branches.single{grid-template-columns:minmax(0,1fr);max-width:390px}
+.footer-branch{min-width:0;font-size:15px;line-height:1.5}
+.footer-branch address{font-style:normal;margin:0 0 14px;overflow-wrap:anywhere}
+.footer-branch a{color:inherit;display:block;width:fit-content;max-width:100%;min-height:30px;overflow-wrap:anywhere}
+.footer-branch a:hover{color:#fff}
+.footer-branch p{margin:10px 0 0}
+.footer-branch .footer-education{margin-top:20px}
+.footer-education span{display:block;color:#d5d6da;font-size:13px;margin-bottom:4px}
+.footer-branch .footer-whatsapp{margin-top:8px;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:760px){
+ .site-footer{margin-top:56px;padding:36px 0 44px}
+ .site-footer h2{font-size:16px;margin-bottom:20px}
+ .footer-branches{gap:20px;max-width:none}
+ .footer-branch{font-size:13px;line-height:1.5}
+ .footer-branch address{margin-bottom:12px}
+ .footer-branch a{min-height:32px;padding-block:4px}
+ .footer-education span{font-size:12px}
+}
+@media(max-width:380px){.footer-branches{gap:16px}.footer-branch{font-size:12px}}
+
+/* Статус отправки формы и скрытое поле-ловушка для ботов. */
+.form-status{margin-top:12px;font-size:14px;line-height:1.5;border-radius:8px;padding:10px 12px;background:#fde7dd;color:var(--ink)}
+.form-status:empty{display:none}
+.form-status.success{background:#e3f6e8}
+.submit:disabled{opacity:.6;cursor:wait}
+.hp-field{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
+
+/* Плавающая кнопка WhatsApp (whatsapp.js). */
+.wa-float{position:fixed;right:16px;bottom:16px;z-index:40;width:58px;height:58px;border-radius:50%;background:#25d366;color:#fff;display:grid;place-items:center;box-shadow:0 12px 28px -10px #00000073;transition:transform .2s}
+.wa-float:hover{transform:scale(1.07)}
+.wa-float .wa-icon{width:30px;height:30px;fill:currentColor}
+@media(min-width:900px){.wa-float{right:24px;bottom:24px}}
