@@ -1,11 +1,13 @@
 /** Заголовок первого экрана под ключевое слово из поиска. Google и Яндекс передают ключ из кабинета в utm_term
  *  ({keyword}); по нему выбираем заранее написанный заголовок из HEADLINES. Сам ключ на страницу не попадает никогда.
+ *  Заголовок первого экрана заменяется целиком.
  *  Подмены нет: у кампании конкурентов (utm_campaign с _comp), у ключа с брендом конкурента или нашим брендом,
  *  у ключа без правила — там остаётся стандартный H1 из index.html.
- *  Тест 50/50: половина посетителей с подходящим ключом видит стандартный H1. Вариант («kw:python» или «base:python»)
- *  уходит с заявкой в приёмщик полем h1 (lead.js). Пока в <html> есть класс h1-wait, заголовок скрыт (index.html). */
+ *  Подмену видят все посетители (тест 50/50 снят 06.11.2026). Метка правила («kw:python») уходит с заявкой
+ *  в приёмщик полем h1 (lead.js). Пока в <html> есть класс h1-wait, заголовок скрыт (index.html).
+ *  Файл одинаков для направления во всех городах, кроме TITLE_SUFFIX (tests/headline.test.mjs). */
 
-// Порядок важен: срабатывает первое совпадение. В «3D‑», «IT‑» неразрывный дефис (U+2011): на телефоне не рвёт строку. Ключ приведён к нижнему регистру, «ё» → «е».
+// Порядок важен: срабатывает первое совпадение. Неразрывный дефис (U+2011) в «3D‑», «IT‑»: на телефоне не рвёт строку. Ключ приведён к нижнему регистру, «ё» → «е».
 export const HEADLINES = [
  {id: 'robotics-courses', test: /(курс|кружок|кружк|секци).*робот|робот.*(курс|кружок|кружк|секци)/, html: 'Курсы робототехники <span>для детей</span>'},
  {id: 'robotics', test: /робот|lego|лего|mindstorms/, html: 'Робототехника <span>для детей</span>'},
@@ -21,10 +23,11 @@ export const HEADLINES = [
  {id: 'clubs', test: /кружок|кружк/, html: 'IT‑кружки <span>для детей</span>'},
 ];
 
+export const TITLE_SUFFIX = ' — Академия ШАГ в Астане';
+
 // Бренды конкурентов и наш: такие ключи всегда ведут на стандартный H1.
-const BRANDS = /kodland|кодленд|algoritmika|алгоритмик|robotek|роботек|kiber|кибер|jascode|жаскод|kursor|курсор|impact|импакт|techspace|техспейс|шаг|step/;
+const BRANDS = /kodland|кодленд|algoritmika|алгоритмик|robotek|роботек|kiber|кибер|jascode|жаскод|kursor|курсор|impact|импакт|techspace|техспейс|skillbox|скилбокс|geekbrains|гикбрейнс|hexlet|хекслет|практикум|praktikum|яндекс|yandex|contented|контентед|bang bang|id&me|шаг|step/;
 const COMPETITOR_CAMPAIGN = /(^|_)comp(_|$)/;
-export const STORAGE_KEY = 'h1_ab';
 
 export function normalize(term) {
  return String(term || '').toLowerCase().replace(/ё/g, 'е').replace(/[+"'[\]]/g, ' ').replace(/\s+/g, ' ').trim();
@@ -38,34 +41,23 @@ export function pickHeadline(search) {
  return HEADLINES.find(h => h.test.test(term)) || null;
 }
 
-/** Вариант теста: один раз на посетителя (localStorage), без хранилища — случайно на каждую загрузку. */
-export function abVariant(storage = globalThis.localStorage, random = Math.random) {
- try {
-  const saved = storage.getItem(STORAGE_KEY);
-  if (saved === 'kw' || saved === 'base') return saved;
-  const variant = random() < 0.5 ? 'kw' : 'base';
-  storage.setItem(STORAGE_KEY, variant);
-  return variant;
- } catch {
-  return random() < 0.5 ? 'kw' : 'base';
- }
-}
-
-/** Подменяет H1 и title; возвращает метку для заявки («kw:python», «base:python») или ''. */
-export function applyHeadline(doc, search, variant) {
+/** Подменяет H1 и title; возвращает метку для заявки («kw:python») или ''. */
+export function applyHeadline(doc, search) {
  const rule = pickHeadline(search);
  if (!rule) return '';
- if (variant === 'kw') {
-  const h1 = doc.getElementById('hero-title');
-  if (h1) h1.innerHTML = rule.html;
-  doc.title = rule.html.replace(/<[^>]+>/g, '') + ' — Академия ШАГ в Астане';
+ const h1 = doc.getElementById('hero-title');
+ if (h1) {
+  const lockup = h1.querySelector?.('.hero-ai-lockup');
+  h1.innerHTML = rule.html + (lockup ? ' ' + lockup.outerHTML : '');
+  h1.classList?.add('h1-kw');
  }
- return `${variant}:${rule.id}`;
+ doc.title = rule.html.replace(/<br>/g, ' ').replace(/<[^>]+>/g, '').replace(/‑ /g, '‑') + TITLE_SUFFIX;
+ return `kw:${rule.id}`;
 }
 
 if (typeof document !== 'undefined') {
  try {
-  const label = applyHeadline(document, globalThis.location.search, abVariant());
+  const label = applyHeadline(document, globalThis.location.search);
   if (label) document.documentElement.dataset.h1 = label;
  } finally {
   document.documentElement.classList.remove('h1-wait');
