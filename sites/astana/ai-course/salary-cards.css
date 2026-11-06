@@ -1,0 +1,30 @@
+.dark .salary-section .salary{gap:30px}
+.dark .salary-section .salary-card{position:relative;isolation:isolate;display:flex;flex-direction:column;min-width:0;min-height:354px;padding:146px 25px 28px;border:0;border-radius:0;background:none;color:#f5f5f5;--salary-accent:#a5d74f}
+.dark .salary-card::before{content:"";position:absolute;z-index:-1;inset:0;background-image:url('assets/salary-card.webp');background-size:100% 100%;background-repeat:no-repeat;pointer-events:none}
+.dark .salary-card.salary-middle{--salary-accent:#b6a1ff}
+.dark .salary-card.salary-middle::before{filter:hue-rotate(175deg)}
+.dark .salary-card.salary-senior{--salary-accent:#ffd905}
+.dark .salary-card.salary-senior::before{filter:hue-rotate(-27deg)}
+.dark .salary-section .salary-card h3{font-size:24px;line-height:1.15;font-weight:600;letter-spacing:-.015em;color:var(--salary-accent);margin:0 0 10px}
+.dark .salary-section .salary-card p{font-size:17px;line-height:1.32;color:#fff;max-width:none;margin:0}
+.dark .salary-section .salary-card .salary-number{font-size:28px;line-height:1.2;font-weight:800;letter-spacing:-.025em;text-align:right;color:var(--salary-accent);margin-top:auto;padding-top:22px;align-self:stretch}
+.dark .salary-card[data-loop-clone]{display:none}
+.dark .salary-loop-controls{display:none}
+@media(min-width:701px) and (max-width:1000px){
+ .dark .salary-section .salary{gap:18px}
+ .dark .salary-section .salary-card{padding:112px 20px 24px;min-height:340px}
+ .dark .salary-section .salary-card h3{font-size:21px}
+ .dark .salary-section .salary-card p{font-size:16px}
+ .dark .salary-section .salary-card .salary-number{font-size:26px}
+}
+@media(max-width:700px){
+ .dark .salary-section .salary{display:flex;position:relative;align-items:stretch;gap:14px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;-ms-overflow-style:none;padding:0}
+ .dark .salary-section .salary::-webkit-scrollbar{display:none;width:0;height:0}
+ .dark .salary-section .salary-card{display:flex;flex:none;width:calc(100% - 22px);min-height:360px;padding:150px 21px 25px;scroll-snap-align:start;scroll-snap-stop:always}
+ .dark .salary-section .salary-card h3{font-size:23px}
+ .dark .salary-section .salary-card p{font-size:17px}
+ .dark .salary-section .salary-card .salary-number{font-size:27px;white-space:nowrap}
+ .dark .salary-loop-controls{display:flex;justify-content:flex-end;gap:12px;margin-top:16px}
+ .dark .salary-loop-controls button{display:flex;align-items:center;justify-content:center;width:40px;height:40px;min-height:40px;padding:0;border-radius:10px;background:#414157}
+ .dark .salary-loop-controls img{width:20px;height:20px;filter:invert(1)}
+}

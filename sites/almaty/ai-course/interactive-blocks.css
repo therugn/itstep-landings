@@ -1,0 +1,53 @@
+.dark :is(.module,.faq details){border:0}
+.dark :is(.module:last-child,.faq details:last-child){border:0}
+.dark :is(.module,.faq details,.resume-disclosure)>summary{display:flex;align-items:center;justify-content:space-between;gap:24px;max-width:none;width:100%;min-height:48px;list-style:none}
+.dark .disclosure-label{min-width:0}
+.dark .disclosure-icon{display:flex;align-items:center;justify-content:center;width:28px;height:28px;flex:0 0 28px}
+.dark .disclosure-icon img{width:22px;height:22px;filter:invert(1);display:block}
+.dark .disclosure-icon .icon-minus{display:none}
+.dark details[open]>summary .icon-plus{display:none}
+.dark details[open]>summary .icon-minus{display:block}
+.dark .resume-disclosure{margin-bottom:18px}
+.dark .resume-disclosure:last-child{margin-bottom:0}
+.dark .resume-disclosure>summary{font-size:24px;font-weight:600;line-height:1.25}
+.dark .resume-disclosure>ul{padding-top:22px;margin-bottom:0}
+.dark .resume-disclosure>.technologies{padding-top:22px}
+.dark .technologies .technology-item{display:flex;align-items:center;gap:10px;padding:10px 12px;font-size:14px;line-height:1.3}
+.dark .technologies .tech-name{padding:0;border-radius:0;background:none;max-width:none}
+.dark .technologies .tech-logo-wrap{display:flex;align-items:center;justify-content:center;width:34px;height:34px;flex:0 0 34px;padding:3px;border-radius:7px;background:#fff}
+.dark .tech-logo{width:28px;height:28px;object-fit:contain;display:block}
+.dark .program-heading{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:26px}
+.dark .program-heading h2{margin:0;flex:1;min-width:0}
+.dark .program-controls{display:flex;align-items:center;gap:18px;flex-shrink:0}
+.dark .program-controls .tabs{margin:0}
+.dark .program-controls .tabs button{min-width:88px;padding-inline:18px}
+.dark .program-counts{display:flex;flex-direction:column;gap:5px;font-size:14px;line-height:1.4;color:var(--muted);white-space:nowrap}
+.dark .program-counts .is-active{color:var(--text);font-weight:600}
+.dark .panel-topic-count{display:none}
+.dark .carousel-controls{display:none}
+
+@media(max-width:700px){
+ .dark .resume-title{display:flex;align-items:center;justify-content:space-between;gap:12px}
+ .dark .resume-title>span{font-size:16px;line-height:1.3}
+ .dark .resume-title h3{font-size:22px;line-height:1.2;font-weight:600;letter-spacing:0;text-align:right;margin:0}
+ .dark .resume-disclosure>summary{font-size:22px;min-height:48px;gap:14px}
+ .dark .technologies .technology-item{padding:9px 10px;gap:8px;font-size:14px}
+ .dark .resume-disclosure>ul{font-size:17px}
+ .dark :is(.module,.faq details)>summary{gap:16px}
+ .dark .disclosure-icon{width:24px;height:24px;flex-basis:24px}
+ .dark .disclosure-icon img{width:21px;height:21px}
+ .dark .program-heading{display:block;margin-bottom:23px}
+ .dark .program-heading h2{margin-bottom:24px}
+ .dark .program-controls{display:flex;flex-direction:column;align-items:stretch;gap:14px}
+ .dark .program-counts{flex-direction:row;justify-content:space-between;gap:16px;font-size:14px}
+ .dark .program-controls .tabs{width:100%}
+ .dark .mobile-carousel{display:grid;position:relative;grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:calc(100% - 22px);grid-auto-rows:auto;gap:14px;align-items:stretch;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scroll-padding-inline:0;scrollbar-width:none;-ms-overflow-style:none;padding-bottom:0}
+ .dark .mobile-carousel>[data-carousel-slide],.dark .mobile-carousel [data-carousel-slide]{scroll-snap-align:start;scroll-snap-stop:always;min-width:0;max-width:100%;margin-bottom:0}
+ .dark .practice-carousel .support{display:contents}
+ .dark .practice-carousel .practice-main{margin-bottom:0}
+ .dark .mobile-carousel::-webkit-scrollbar{display:none;width:0;height:0}
+ .dark .carousel-controls{display:flex;justify-content:flex-end;align-items:center;gap:12px;margin-top:16px}
+ .dark .carousel-controls button{display:flex;align-items:center;justify-content:center;width:40px;height:40px;min-height:40px;padding:0;border-radius:10px;background:#414157;color:#fff}
+ .dark .carousel-controls button img{width:20px;height:20px;filter:invert(1)}
+ .dark .carousel-controls button:disabled{opacity:.35;filter:none}
+}
