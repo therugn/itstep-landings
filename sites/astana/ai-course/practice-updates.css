@@ -1,0 +1,30 @@
+.dark .hero-highlight{color:#a5d74f}
+.dark .hero-form-intro h2{font-size:24px;line-height:1.2}
+.dark .audience-image img{object-fit:cover}
+.dark .application h2{font-size:24px;line-height:1.2;margin-bottom:10px}
+.dark .application-description{font-size:17px;line-height:1.45;margin:0 0 26px}
+.dark .application .application-field{display:flex;flex-direction:column;gap:8px;min-width:0;font-size:14px;font-weight:600;line-height:1.4}
+.dark .application .fields{align-items:end}
+.dark .application .fields button{padding-inline:18px;font-size:16px}
+.dark .program #tab-pro[aria-selected="true"]{background:#a5d74f;color:#111}
+@media(min-width:1001px){.dark .application .fields{grid-template-columns:1fr 1fr 280px}}
+@media(max-width:700px){
+ .dark .hero-form-intro h2{font-size:22px;line-height:1.2}
+ .dark .hero-art .portrait{object-position:center bottom;transform:translateY(2.214%)}
+ .dark .hero .facts{margin-top:0}
+ .dark .application h2{font-size:22px;line-height:1.2}
+ .dark .application-description{font-size:16px;margin-bottom:24px}
+ .dark .application .fields .application-field{width:100%;height:auto}
+ .dark .practice-carousel .practice-main{align-self:start}
+ .dark .practice-carousel .practice-pair{display:flex;flex-direction:column;gap:14px;width:100%;min-height:0;height:var(--practice-slide-height,auto);max-height:var(--practice-slide-height,none)}
+ .dark .practice-pair article{padding:22px;gap:12px;min-height:0;margin:0;border-radius:18px}
+ .dark .practice-pair article h3{font-size:21px;line-height:1.2;margin-bottom:12px}
+ .dark .practice-pair article p{font-size:16px;line-height:1.4}
+ .dark .practice-pair .mentor-card{flex:none;background:#a5d74f;color:#111}
+ .dark .practice-pair .mentor-card p{color:#111}
+ .dark .practice-pair .mentor-card>img{display:none}
+ .dark .practice-pair .platform-card{flex:1 1 0;background:#414157;color:#fff}
+ .dark .practice-pair .platform-card p{color:#fff}
+ .dark .practice-pair .platform-card>div{flex:none}
+ .dark .practice-pair .platform-card>img{flex:1 1 110px;height:110px;min-height:60px;max-height:none;width:100%;object-fit:contain}
+}

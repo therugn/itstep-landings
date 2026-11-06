@@ -5,6 +5,9 @@
 | Папка | Адрес |
 |---|---|
 | `sites/test` | https://test.it-step.kz |
+| `sites/almaty/ai-course` | https://almaty.it-step.kz/ai-course |
+| `sites/astana/ai-course` | https://astana.it-step.kz/ai-course |
+| `sites/tashkent/ai-course` | https://tashkent.stepacademy.uz/ai-course |
 | `sites/astana/mka` | https://astana.it-step.kz/mka |
 | `sites/almaty/rpo-ai` | https://almaty.it-step.kz/rpo-ai |
 | `sites/almaty/mka` | https://almaty.it-step.kz/mka |

@@ -1,0 +1,31 @@
+.dark .reasons{gap:24px;align-items:stretch}
+.dark .reasons .reason-card{display:flex;flex-direction:column;min-width:0;min-height:430px;overflow:hidden;border-radius:22px;padding:28px 24px 0;background:#292929}
+.dark .reasons .reason-card:first-child{background:#292929}
+.dark .reasons .reason-card h3{font-size:24px;font-weight:600;line-height:1.15;letter-spacing:-.015em;margin:0 0 13px;color:#a5d74f}
+.dark .reasons .reason-card p{font-size:16px;font-weight:400;line-height:1.3;color:#fff;margin:0}
+.dark .reasons .reason-card .reason-image{display:block;flex:none;width:calc(100% + 48px);max-width:none;height:245px;object-fit:contain;object-position:center bottom;margin:18px -24px 0}
+.dark .reasons .reason-easy .reason-image{margin-top:auto}
+.dark .reasons .reason-practice{padding:20px 20px 28px;background:#3a20ce}
+.dark .reasons .reason-practice .reason-image{width:100%;height:auto;aspect-ratio:3/2;object-fit:contain;margin:0 0 20px;border-radius:14px}
+.dark .reasons .reason-practice h3{color:#fff}
+.dark .reasons .reason-growth h3{color:#ffd905}
+.dark .reasons .reason-growth .reason-image{margin-top:auto;height:245px;padding:14px 12px 24px}
+@media(min-width:701px) and (max-width:1000px){
+ .dark .reasons{gap:16px}
+ .dark .reasons .reason-card{padding:24px 18px 0;min-height:380px;border-radius:18px}
+ .dark .reasons .reason-card h3{font-size:21px}
+ .dark .reasons .reason-card p{font-size:15px}
+ .dark .reasons .reason-card .reason-image{width:calc(100% + 36px);margin-inline:-18px;height:190px}
+ .dark .reasons .reason-practice{padding:16px 16px 24px}
+ .dark .reasons .reason-practice .reason-image{width:100%;height:auto;margin:0 0 20px}
+}
+@media(max-width:700px){
+ .dark .reasons{gap:18px}
+ .dark .reasons .reason-card{padding:26px 24px 0;min-height:390px;border-radius:20px}
+ .dark .reasons .reason-card h3{font-size:23px;margin-bottom:12px}
+ .dark .reasons .reason-card p{font-size:16px;line-height:1.4}
+ .dark .reasons .reason-card .reason-image{height:235px;width:calc(100% + 48px);margin-inline:-24px}
+ .dark .reasons .reason-practice{padding:18px 18px 26px}
+ .dark .reasons .reason-practice .reason-image{width:100%;height:auto;margin:0 0 20px}
+ .dark .reasons .reason-growth .reason-image{height:235px;padding:18px 12px 22px}
+}
