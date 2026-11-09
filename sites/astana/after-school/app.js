@@ -1,4 +1,4 @@
-import {getSchedule} from './schedule.mjs?v=20261103';
+import {getSchedule} from './schedule.js?v=20261109';
 import {validateLead,submitLead} from './lead.js';
 
 let shift = 'afternoon';
@@ -74,14 +74,7 @@ function showInfo(title,paragraphs) {
  document.body.classList.add('modal-open');
 }
 function showContacts() {
- showInfo('Контакты',[
-  '+7 (705) 957-51-50',
-  '+7 (705) 593-63-95',
-  'welcome@itstep.org',
-  'г. Алматы, Коктем-3, дом 16а.',
-  'улица Байсеитовой, 45',
-  'Приёмная комиссия: пн–сб 09:30–19:00, вс 10:00–18:00'
- ]);
+ showInfo('Контакты',["г. Астана, ул. Сыганак, 47, БЦ Eurocenter, 13 этаж", "+7 (705) 535-35-53", "+7 (771) 936-50-66", "+7 (771) 936-53-67", "Приёмная комиссия: Пн–Сб 09:30–19:00; Вс 10:00–18:00", "г. Астана, проспект Тауелсиздик, 20/1", "+7 (771) 936-50-66", "+7 (705) 535-35-53", "Приёмная комиссия: Пн–Сб 09:30–19:00; Вс 10:00–18:00", "welcome@itstep.org"]);
 }
 document.querySelectorAll('[data-contact]').forEach(button=>button.addEventListener('click',showContacts));
 dialog.addEventListener('close',()=>{

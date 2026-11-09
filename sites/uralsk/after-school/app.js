@@ -1,4 +1,4 @@
-import {getSchedule} from './schedule.mjs?v=20261103';
+import {getSchedule} from './schedule.js?v=20261109';
 import {validateLead,submitLead} from './lead.js';
 
 let shift = 'afternoon';
@@ -74,7 +74,7 @@ function showInfo(title,paragraphs) {
  document.body.classList.add('modal-open');
 }
 function showContacts() {
- showInfo('Контакты',["г. Шымкент, проспект Кунаева, 59, БЦ «Астана», 7 этаж, кабинет 701", "+7 (771) 083-33-83", "Приёмная комиссия: Пн–Сб 10:00–19:00; Вс 10:00–18:00", "welcome@itstep.org"]);
+ showInfo('Контакты',["г. Уральск, ул. Алии Молдагуловой, 25", "+7 (777) 522-53-72", "Приёмная комиссия: Пн–Сб 10:00–19:00; Вс 10:00–18:00", "welcome@itstep.org"]);
 }
 document.querySelectorAll('[data-contact]').forEach(button=>button.addEventListener('click',showContacts));
 dialog.addEventListener('close',()=>{

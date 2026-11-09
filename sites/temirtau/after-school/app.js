@@ -1,4 +1,4 @@
-import {getSchedule} from './schedule.mjs?v=20261103';
+import {getSchedule} from './schedule.js?v=20261109';
 import {validateLead,submitLead} from './lead.js';
 
 let shift = 'afternoon';
@@ -74,7 +74,7 @@ function showInfo(title,paragraphs) {
  document.body.classList.add('modal-open');
 }
 function showContacts() {
- showInfo('Контакты',["г. Ташкент, Мирабадский район, ул. Амира Темура, 15", "+998 (55) 588-33-43", "+998 (55) 588-33-34", "Приёмная комиссия: Пн–Сб 09:30–19:00; Вс 10:00–18:00", "welcome@itstep.org"]);
+ showInfo('Контакты',["г. Темиртау, ул. Чайковского, 24/3", "+7 (708) 651-47-62", "Приёмная комиссия: Пн–Сб 10:00–19:00; Вс 10:00–18:00", "welcome@itstep.org"]);
 }
 document.querySelectorAll('[data-contact]').forEach(button=>button.addEventListener('click',showContacts));
 dialog.addEventListener('close',()=>{
