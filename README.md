@@ -6,6 +6,7 @@
 |---|---|
 | `sites/test` | https://test.it-step.kz |
 | `sites/almaty/ai-course` | https://almaty.it-step.kz/ai-course |
+| `sites/almaty/vibe-coding` | https://almaty.it-step.kz/vibe-coding/ |
 | `sites/astana/ai-course` | https://astana.it-step.kz/ai-course |
 | `sites/tashkent/ai-course` | https://tashkent.stepacademy.uz/ai-course |
 | `sites/astana/mka` | https://astana.it-step.kz/mka |
@@ -59,3 +60,7 @@
 - Тест 50/50: половина посетителей с подходящим ключом видит стандартный H1, вариант закреплён за посетителем (`localStorage`, `h1_ab`). Метка `kw:<правило>` или `base:<правило>` уходит с заявкой полем `h1` (`lead.js`). Приёмщик пока его не сохраняет — нужна правка `ATTR_KEYS` в `itstep-leads`.
 - Пока скрипт не отработал, H1 скрыт классом `h1-wait` (не дольше 1,5 с, только при `utm_term` в адресе) — без мигания старого заголовка.
 - Новое правило или новый ключ кампании — строка в `HEADLINES` и пример в `tests/headline.test.mjs`. Заголовок до ~40 знаков, акцент в `<span>`, в «3D‑», «IT‑» неразрывный дефис.
+
+## Вайбкодинг Алматы
+
+`sites/almaty/vibe-coding/` — утверждённый светлый макет, подпись «Г.Алматы», ШАГ + Astana Hub, официальный PDF «Вайб кодинг KZ.pdf». Изображения преобразованы в WebP, каждый файл до 300 КБ. PDF сохранён без изменений. По уточнённому запросу пользователя подключены обе формы к общему приёмщику (product: «Вайбкодинг»), скрытое поле-ловушка, рекламные метки, подтверждённая страница «Спасибо» и WhatsApp Алматы 77059921014 с кодом клика. Сниппеты Google Ads и Meta Казахстана, конверсии и проверка метки заявки используют стандартные модули репозитория.
