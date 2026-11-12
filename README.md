@@ -7,6 +7,11 @@
 | `sites/test` | https://test.it-step.kz |
 | `sites/almaty/ai-course` | https://almaty.it-step.kz/ai-course |
 | `sites/almaty/vibe-coding` | https://almaty.it-step.kz/vibe-coding/ |
+| `sites/astana/vibe-coding` | https://astana.it-step.kz/vibe-coding/ |
+| `sites/karaganda/vibe-coding` | https://karaganda.it-step.kz/vibe-coding/ |
+| `sites/shymkent/vibe-coding` | https://shymkent.it-step.kz/vibe-coding/ |
+| `sites/uralsk/vibe-coding` | https://uralsk.it-step.kz/vibe-coding/ |
+| `sites/temirtau/vibe-coding` | https://temirtau.it-step.kz/vibe-coding/ |
 | `sites/astana/ai-course` | https://astana.it-step.kz/ai-course |
 | `sites/tashkent/ai-course` | https://tashkent.stepacademy.uz/ai-course |
 | `sites/astana/mka` | https://astana.it-step.kz/mka |
@@ -61,6 +66,8 @@
 - Пока скрипт не отработал, H1 скрыт классом `h1-wait` (не дольше 1,5 с, только при `utm_term` в адресе) — без мигания старого заголовка.
 - Новое правило или новый ключ кампании — строка в `HEADLINES` и пример в `tests/headline.test.mjs`. Заголовок до ~40 знаков, акцент в `<span>`, в «3D‑», «IT‑» неразрывный дефис.
 
-## Вайбкодинг Алматы
+## Вайбкодинг (6 городов Казахстана)
 
 `sites/almaty/vibe-coding/` — утверждённый светлый макет, подпись «Г.Алматы», ШАГ + Astana Hub, официальный PDF «Вайб кодинг KZ.pdf». Изображения преобразованы в WebP, каждый файл до 300 КБ. PDF сохранён без изменений. По уточнённому запросу пользователя подключены обе формы к общему приёмщику (product: «Вайбкодинг»), скрытое поле-ловушка, рекламные метки, подтверждённая страница «Спасибо» и WhatsApp Алматы 77059921014 с кодом клика. Сниппеты Google Ads и Meta Казахстана, конверсии и проверка метки заявки используют стандартные модули репозитория.
+
+Копии в Астане, Караганде, Шымкенте, Уральске и Темиртау (12.11.2026) отличаются от Алматы только данными города: адреса пробного урока и подвала, телефоны, часы работы, политика конфиденциальности `<город>.itstep.org/privacy.pdf`, страница «Спасибо» (`spasibo.js` `PHONE`) и номер Wazzup в `whatsapp.js`. PDF программы (14 МБ) лежит только в Алматы, остальные города открывают его по ссылке `https://almaty.it-step.kz/vibe-coding/assets/vibe-coding-program.pdf` — чтобы не раздувать репозиторий и сборку. Правка текста лендинга — во всех шести копиях.
