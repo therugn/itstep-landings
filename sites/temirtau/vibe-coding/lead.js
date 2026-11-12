@@ -22,7 +22,7 @@ export function validateLead(data) {
  return errors;
 }
 export async function submitLead(data, endpoint = LEAD_ENDPOINT, transport = fetch) {
- if (!endpoint) return {ok:false,code:'unconfigured',message:'Это демонстрационная форма. Заявка не отправлена: приём заявок пока не подключён. Позвоните в академию: +7 (705) 957-51-50.'};
+ if (!endpoint) return {ok:false,code:'unconfigured',message:'Это демонстрационная форма. Заявка не отправлена: приём заявок пока не подключён. Позвоните в академию: +7 (708) 651-47-62.'};
  try {
   const response=await transport(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(buildPayload(data)),signal:AbortSignal.timeout(15000)});
   if (!response.ok) return {ok:false,code:'server',message:'Сервис не принял заявку. Попробуйте позже или позвоните в академию.'};
