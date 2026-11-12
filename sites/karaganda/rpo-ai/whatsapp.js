@@ -5,7 +5,7 @@
  *  не телефон филиала. Меняется только строка WHATSAPP; остальное одинаково на всех лендингах (tests/whatsapp.test.mjs). */
 import {fireWhatsAppClick} from './conversion.js';
 
-export const WHATSAPP = {phone: '77775555995', text: 'Здравствуйте! Хочу узнать о курсе «РПО + AI».'};
+export const WHATSAPP = {phone: '77066834567', text: 'Здравствуйте! Хочу узнать о курсе «РПО + AI».'};
 export const CLICK_ENDPOINT = 'https://api.it-step.kz/wa/click';   // приёмщик заявок: запись клика (код, страница, метки)
 const TRACKING = /^(utm_[a-z_]+|gclid|yclid|fbclid)$/;
 const ALPHABET = 'abcdefghjkmnpqrstuvwxyz23456789';               // без 0/1/i/l/o: код читают глазами
