@@ -10,7 +10,7 @@ const SITES = fileURLToPath(new URL('../sites/', import.meta.url));
 const CITY = {astana: 'Астана', almaty: 'Алматы', shymkent: 'Шымкент', karaganda: 'Караганда', uralsk: 'Уральск', temirtau: 'Темиртау', tashkent: 'Ташкент', samarkand: 'Самарканд'};
 // Бренд по стране: Узбекистан — IT STEP Academy, Казахстан — Академия ШАГ.
 const UZ = new Set(['tashkent', 'samarkand']);
-const PRODUCT = {'ai-course': 'Искусственный интеллект с нуля до профи', mka: 'Малая компьютерная академия', 'rpo-ai': 'РПО + AI', 'design-ai': 'Дизайн + AI', 'after-school': 'IT-продлёнка'};
+const PRODUCT = {'ai-course': 'Искусственный интеллект с нуля до профи', mka: 'Малая компьютерная академия', 'rpo-ai': 'РПО + AI', 'design-ai': 'Дизайн + AI', 'after-school': 'IT-продлёнка', 'vibe-coding': 'Вайбкодинг'};
 
 const digits = s => s.replace(/\D/g, '');
 const pages = readdirSync(SITES).flatMap(c => readdirSync(join(SITES, c), {withFileTypes: true})
