@@ -12,6 +12,8 @@
 | `sites/shymkent/vibe-coding` | https://shymkent.it-step.kz/vibe-coding/ |
 | `sites/uralsk/vibe-coding` | https://uralsk.it-step.kz/vibe-coding/ |
 | `sites/temirtau/vibe-coding` | https://temirtau.it-step.kz/vibe-coding/ |
+| `sites/tashkent/vibe-coding` | https://tashkent.stepacademy.uz/vibe-coding/ |
+| `sites/samarkand/vibe-coding` | https://samarkand.stepacademy.uz/vibe-coding/ |
 | `sites/astana/ai-course` | https://astana.it-step.kz/ai-course |
 | `sites/tashkent/ai-course` | https://tashkent.stepacademy.uz/ai-course |
 | `sites/astana/mka` | https://astana.it-step.kz/mka |
@@ -70,4 +72,6 @@
 
 `sites/almaty/vibe-coding/` — утверждённый светлый макет, подпись «Г.Алматы», ШАГ + Astana Hub, официальный PDF «Вайб кодинг KZ.pdf». Изображения преобразованы в WebP, каждый файл до 300 КБ. PDF сохранён без изменений. По уточнённому запросу пользователя подключены обе формы к общему приёмщику (product: «Вайбкодинг»), скрытое поле-ловушка, рекламные метки, подтверждённая страница «Спасибо» и WhatsApp Алматы 77059921014 с кодом клика. Сниппеты Google Ads и Meta Казахстана, конверсии и проверка метки заявки используют стандартные модули репозитория.
 
-Копии в Астане, Караганде, Шымкенте, Уральске и Темиртау (12.11.2026) отличаются от Алматы только данными города: адреса пробного урока и подвала, телефоны, часы работы, политика конфиденциальности `<город>.itstep.org/privacy.pdf`, страница «Спасибо» (`spasibo.js` `PHONE`) и номер Wazzup в `whatsapp.js`. PDF программы (14 МБ) лежит только в Алматы, остальные города открывают его по ссылке `https://almaty.it-step.kz/vibe-coding/assets/vibe-coding-program.pdf` — чтобы не раздувать репозиторий и сборку. Правка текста лендинга — во всех шести копиях.
+Копии в Астане, Караганде, Шымкенте, Уральске и Темиртау (12.11.2026) отличаются от Алматы только данными города: адреса пробного урока и подвала, телефоны, часы работы, политика конфиденциальности `<город>.itstep.org/privacy.pdf`, страница «Спасибо» (`spasibo.js` `PHONE`) и номер Wazzup в `whatsapp.js`. PDF программы (14 МБ) лежит только в Алматы, остальные города открывают его по ссылке `https://almaty.it-step.kz/vibe-coding/assets/vibe-coding-program.pdf` — чтобы не раздувать репозиторий и сборку. Правка текста лендинга — во всех восьми копиях.
+
+Ташкент и Самарканд (13.11.2026) — бренд IT STEP Academy, логотипы IT STEP и IT Park (материалы Ринаты), телефон +998, пиксель Meta Узбекистана, программа — свой PDF из картинки «Вайб-кодинг IT STEP». Блока зарплат в тенге с вакансиями hh.kz нет. Ташкент — кнопка Telegram `telegram.js`, Самарканд — без кнопки мессенджера.
