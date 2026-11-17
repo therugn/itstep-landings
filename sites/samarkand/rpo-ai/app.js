@@ -1,4 +1,4 @@
-import { submitLead } from './lead.js';
+import { submitLead, validateLead } from './lead.js';
 
 (() => {
   const menuButton = document.querySelector('.menu-toggle');
@@ -221,7 +221,7 @@ import { submitLead } from './lead.js';
       const { name, phone, consent } = form.elements;
       const digits = phone.value.replace(/\D/g, '');
       setError(name, name.value.trim().length < 2 ? 'Введите имя — не менее двух символов.' : '');
-      setError(phone, !/^\+?[\d\s()\-]+$/.test(phone.value.trim()) || !/^(998)?\d{9}$/.test(digits) ? 'Введите номер: +998 и 9 цифр, например +998 (90) 123-45-67.' : '');
+      setError(phone, validateLead({ phone: phone.value }).phone || '');
       setError(consent, !consent.checked ? 'Подтвердите согласие на обработку данных.' : '');
       return form.querySelector('[aria-invalid="true"]');
     };
