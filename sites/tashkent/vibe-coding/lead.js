@@ -16,7 +16,7 @@ export function validateLead(data) {
  const errors = {};
  if (!data.name?.trim() || data.name.trim().length < 2) errors.name = 'Введите имя — не менее двух букв.';
  const phone = (data.phone || '').replace(/\D/g, '');
- if (!/^(998)?\d{9}$/.test(phone)) errors.phone = 'Введите телефон: +998 и ещё 9 цифр.';
+ if (!/^(998)?\d{9}$/.test(phone)) errors.phone = 'Проверьте номер: например, +998 90 123 45 67.';
  if (data.email?.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim())) errors.email = 'Проверьте адрес электронной почты.';
  if (!data.consent) errors.consent = 'Для заявки необходимо согласие на обработку данных.';
  return errors;
