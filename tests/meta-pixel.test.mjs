@@ -40,6 +40,19 @@ test('на каждой странице продукта и «Спасибо» 
  }
 });
 
+// Решение Ильи 17.11.2026: Lead — строкой в коде пикселя «Спасибо» (сразу после PageView), не из скрипта.
+test('«Спасибо»: fbq(\'track\', \'Lead\') в коде пикселя ровно один раз, на странице продукта Lead нет', () => {
+ for (const {city, dir} of landings()) {
+  const id = UZ_CITIES.has(city) ? PIXEL.UZ : PIXEL.KZ;
+  const thanks = readFileSync(`${dir}/spasibo/index.html`, 'utf8');
+  const head = thanks.slice(0, thanks.indexOf('</head>'));
+  assert.ok(head.includes("fbq('track', 'PageView');\nfbq('track', 'Lead');"), `${dir}/spasibo: нет fbq('track', 'Lead') после PageView`);
+  assert.equal((thanks.match(/'Lead'/g) || []).length, 1, `${dir}/spasibo: Lead должен быть ровно один`);
+  assert.ok(head.includes(`tr?id=${id}&ev=Lead&noscript=1`), `${dir}/spasibo: нет noscript для Lead`);
+  assert.ok(!readFileSync(`${dir}/index.html`, 'utf8').includes("'Lead'"), `${dir}: Lead на странице продукта`);
+ }
+});
+
 test('корневые переадресации городов без пикселя (иначе двойной PageView)', () => {
  for (const city of readdirSync(SITES)) {
   const f = `${SITES}${city}/index.html`;
@@ -51,10 +64,10 @@ const FIRST = landings().map(x => `${x.dir}/conversion.js`).filter(existsSync)[0
 const {CONVERSIONS, fireConversions, fireWhatsAppClick} = await import(pathToFileURL(FIRST));
 const fakeWin = () => { const calls = []; return {calls, fbq: (...a) => calls.push(['fbq', ...a]), gtag: (...a) => calls.push(['gtag', ...a])}; };
 
-test('заявка подтверждена — Lead в Meta вместе с конверсией Google', () => {
+test('заявка подтверждена — конверсия Google; Lead в Meta из скрипта не дублируется', () => {
  const w = fakeWin();
- assert.deepEqual(fireConversions(w), ['google-ads', 'meta']);
- assert.deepEqual(w.calls.filter(c => c[0] === 'fbq'), [['fbq', 'track', 'Lead']]);
+ assert.deepEqual(fireConversions(w), ['google-ads']);
+ assert.deepEqual(w.calls.filter(c => c[0] === 'fbq'), []);
 });
 
 test('клик по мессенджеру — Contact в Meta', () => {
@@ -67,6 +80,7 @@ test('без загруженного fbq (блокировщик рекламы
  const gtagOnly = {gtag() {}};
  assert.deepEqual(fireConversions(gtagOnly), ['google-ads']);
  assert.deepEqual(fireWhatsAppClick(gtagOnly), ['google-ads']);
+ assert.deepEqual(fireWhatsAppClick({fbq() {}}), ['meta']);
  assert.deepEqual(fireConversions({}), []);
  assert.equal(CONVERSIONS.metaPixel, true);
 });
