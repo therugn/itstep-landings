@@ -8,6 +8,9 @@ import {fileURLToPath, pathToFileURL} from 'node:url';
 const SITES = fileURLToPath(new URL('../sites/', import.meta.url));
 const PIXEL = {KZ: '1116204957997416', UZ: '1115445171398466'};
 const UZ_CITIES = new Set(['tashkent', 'samarkand']);   // новый город Узбекистана — добавить сюда
+const CITY_PIXEL = {samarkand: '1661142762219170'};      // свой пиксель города вместо пикселя страны (Самарканд — с 17.11.2026)
+const pixelOf = city => CITY_PIXEL[city] || (UZ_CITIES.has(city) ? PIXEL.UZ : PIXEL.KZ);
+const ALL_PIXELS = [...Object.values(PIXEL), ...Object.values(CITY_PIXEL)];
 
 /** Лендинги sites/<город>/<продукт> с index.html (корневые переадресации и sites/test не трогаем). */
 function landings() {
@@ -26,15 +29,14 @@ test('на каждой странице продукта и «Спасибо» 
  const all = landings();
  assert.ok(all.length > 0);
  for (const {city, dir} of all) {
-  const want = UZ_CITIES.has(city) ? PIXEL.UZ : PIXEL.KZ;
-  const other = UZ_CITIES.has(city) ? PIXEL.KZ : PIXEL.UZ;
+  const want = pixelOf(city);
   for (const page of [`${dir}/index.html`, `${dir}/spasibo/index.html`]) {
    const html = readFileSync(page, 'utf8');
    const head = html.slice(0, html.indexOf('</head>'));
    assert.equal((head.match(/fbq\('init'/g) || []).length, 1, `${page}: fbq init должен быть один раз в <head>`);
    assert.ok(head.includes(`fbq('init', '${want}')`), `${page}: нет пикселя ${want}`);
    assert.ok(head.includes(`tr?id=${want}&`), `${page}: noscript не на пиксель ${want}`);
-   assert.ok(!html.includes(other), `${page}: пиксель другой страны ${other}`);
+   for (const other of ALL_PIXELS.filter(x => x !== want)) assert.ok(!html.includes(other), `${page}: чужой пиксель ${other}`);
    assert.equal((html.match(/fbq\('track', 'PageView'\)/g) || []).length, 1, `${page}: PageView ровно один`);
   }
  }
@@ -43,8 +45,8 @@ test('на каждой странице продукта и «Спасибо» 
 // Решение Ильи 17.11.2026: Lead — строкой в коде пикселя «Спасибо» (сразу после PageView), не из скрипта.
 test('«Спасибо»: fbq(\'track\', \'Lead\') в коде пикселя ровно один раз, на странице продукта Lead нет', () => {
  for (const {city, dir} of landings()) {
-  const id = UZ_CITIES.has(city) ? PIXEL.UZ : PIXEL.KZ;
-  const thanks = readFileSync(`${dir}/spasibo/index.html`, 'utf8');
+  const id = pixelOf(city);
+  const thanks = readFileSync(`${dir}/spasibo/index.html`, 'utf8').replace(/\r\n/g, '\n');   // CRLF после checkout на Windows
   const head = thanks.slice(0, thanks.indexOf('</head>'));
   assert.ok(head.includes("fbq('track', 'PageView');\nfbq('track', 'Lead');"), `${dir}/spasibo: нет fbq('track', 'Lead') после PageView`);
   assert.equal((thanks.match(/'Lead'/g) || []).length, 1, `${dir}/spasibo: Lead должен быть ровно один`);
