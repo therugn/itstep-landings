@@ -108,7 +108,8 @@ test('файл одинаков для направления во всех го
  for (const product of Object.keys(KEYWORDS)) {
   const same = PAGES.filter(p => p.product === product).map(p => {
    assert.equal(p.mod.TITLE_SUFFIX, SUFFIX[product](CITIES[p.city]), `${p.city}/${product}`);
-   return readFileSync(new URL('headline.js', p.dir), 'utf8').replace(/\r\n/g, '\n').replace(/^export const TITLE_SUFFIX = .*$/m, '');
+   assert.equal(p.mod.CITY_IN, CITIES[p.city][1], `${p.city}/${product}: город в заголовке под ключ`);
+   return readFileSync(new URL('headline.js', p.dir), 'utf8').replace(/\r\n/g, '\n').replace(/^export const (TITLE_SUFFIX|CITY_IN) = .*$/gm, '');
   });
   assert.equal(new Set(same).size, 1, `${product}: headline.js разошёлся между городами`);
  }
@@ -130,23 +131,23 @@ function fakeDoc(innerHTML, lockup) {
  return {h1, title: 'исходный', getElementById: id => (id === 'hero-title' ? h1 : null), documentElement: {dataset: {}}};
 }
 
-test('подмена: H1 и title меняются у всех, у дизайна плашка «+ AI» остаётся; без правила ничего не меняется', () => {
+test('подмена: H1 с городом и title меняются у всех, плашка «+ AI» (если есть) остаётся; без правила ничего не меняется', () => {
  const page = (city, product) => PAGES.find(p => p.city === city && p.product === product).mod;
 
  let doc = fakeDoc('Малая компьютерная <span>академия ШАГ</span>');
  assert.equal(page('astana', 'mka').applyHeadline(doc, q('python для детей')), 'kw:python');
- assert.equal(doc.h1.innerHTML, 'Python <span>для детей</span>');
+ assert.equal(doc.h1.innerHTML, 'Python <span>для детей в Астане</span>');
  assert.equal(doc.title, 'Python для детей — Академия ШАГ в Астане');
 
  doc = fakeDoc('AI-Native Developer');
  assert.equal(page('tashkent', 'rpo-ai').applyHeadline(doc, q('курсы python ташкент')), 'kw:python');
- assert.equal(doc.h1.innerHTML, 'Курсы Python с AI');
+ assert.equal(doc.h1.innerHTML, 'Курсы Python с AI в Ташкенте');
  assert.equal(doc.title, 'Курсы Python с AI — IT STEP Academy, Ташкент');
 
  const lockup = '<span class="hero-ai-lockup"><span class="hero-plus">+</span> <span class="ai-badge">AI</span></span>';
  doc = fakeDoc('Графический<br>дизайн ' + lockup, lockup);
  assert.equal(page('almaty', 'design-ai').applyHeadline(doc, q('курсы веб дизайна')), 'kw:web');
- assert.equal(doc.h1.innerHTML, 'Веб‑<br>дизайн ' + lockup);
+ assert.equal(doc.h1.innerHTML, 'Веб‑<br>дизайн в Алматы ' + lockup);
  assert.equal(doc.title, 'Веб‑дизайн + AI — Академия ШАГ, Алматы');
 
  doc = fakeDoc('AI-Native Developer');
@@ -172,7 +173,7 @@ test('index.html: headline.js до app.js, H1 скрыт только на вр�
   assert.ok(at > 0 && at < html.indexOf('src="app.js"'), `${city}/${product}`);
   assert.match(html, /\.h1-wait #hero-title\{visibility:hidden\}/);
   assert.match(html, /classList\.remove\('h1-wait'\)\},1500\)/);
-  assert.match(html, /<h1 id="hero-title">/, `${city}/${product}`);
-  if (product === 'design-ai') assert.match(html, /<h1 id="hero-title">[^]*?class="hero-ai-lockup"[^]*?<\/h1>/, `${city}/${product}: плашка AI в H1`);
+  assert.match(html, /<h1 id="hero-title"[^>]*>/, `${city}/${product}`);
+  assert.match(html, new RegExp(`<h1 id="hero-title"[^>]*>[^<]*(<span>)?[^<]*${CITIES[city][1]}`), `${city}/${product}: город в стандартном H1`);
  }
 });
