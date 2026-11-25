@@ -136,7 +136,7 @@ test('подмена: H1 и title меняются у всех, у дизайн�
 
  let doc = fakeDoc('Малая компьютерная <span>академия ШАГ</span>');
  assert.equal(page('astana', 'mka').applyHeadline(doc, q('python для детей')), 'kw:python');
- assert.equal(doc.h1.innerHTML, 'Python <span>для детей</span>');
+ assert.equal(doc.h1.innerHTML, 'Python <span>для детей в Астане</span>');
  assert.equal(doc.title, 'Python для детей — Академия ШАГ в Астане');
 
  doc = fakeDoc('AI-Native Developer');
@@ -173,7 +173,8 @@ test('index.html: headline.js до app.js, H1 скрыт только на вр�
   assert.ok(at > 0 && at < html.indexOf('src="app.js"'), `${city}/${product}`);
   assert.match(html, /\.h1-wait #hero-title\{visibility:hidden\}/);
   assert.match(html, /classList\.remove\('h1-wait'\)\},1500\)/);
-  assert.match(html, /<h1 id="hero-title">/, `${city}/${product}`);
+  assert.match(html, /<h1 id="hero-title"[^>]*>/, `${city}/${product}`);
+  if (product === 'mka') assert.match(html, new RegExp(`<h1 id="hero-title"[^>]*>IT‑курсы <span>для детей ${CITIES[city][1]}</span></h1>`), `${city}/${product}: город в стандартном H1`);
   if (product === 'design-ai') assert.match(html, /<h1 id="hero-title">[^]*?class="hero-ai-lockup"[^]*?<\/h1>/, `${city}/${product}: плашка AI в H1`);
   if (product === 'rpo-ai') assert.match(html, new RegExp(`<h1 id="hero-title">[^<]*${CITIES[city][1]}</h1>`), `${city}/${product}: город в стандартном H1`);
  }
