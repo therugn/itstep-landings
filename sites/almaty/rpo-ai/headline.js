@@ -5,7 +5,7 @@
  *  у ключа без правила — там остаётся стандартный H1 из index.html.
  *  Подмену видят все посетители (тест 50/50 снят 06.11.2026). Метка правила («kw:python») уходит с заявкой
  *  в приёмщик полем h1 (lead.js). Пока в <html> есть класс h1-wait, заголовок скрыт (index.html).
- *  Файл одинаков для направления во всех городах, кроме TITLE_SUFFIX (tests/headline.test.mjs). */
+ *  Файл одинаков для направления во всех городах, кроме TITLE_SUFFIX и CITY_IN (tests/headline.test.mjs). */
 
 // Порядок важен: срабатывает первое совпадение. Неразрывный дефис (U+2011) в «3D‑», «IT‑»: на телефоне не рвёт строку. Ключ приведён к нижнему регистру, «ё» → «е».
 export const HEADLINES = [
@@ -22,6 +22,12 @@ export const HEADLINES = [
 ];
 
 export const TITLE_SUFFIX = ' — Академия ШАГ, Алматы';
+export const CITY_IN = 'в Алматы';   // город в заголовке под ключ (решение Ильи 25.11.2026)
+
+/** Город в конце заголовка: внутри последнего <span>, если он есть (у МА вторая строка - span). */
+export function withCity(html) {
+ return html.endsWith('</span>') ? html.slice(0, -7) + ' ' + CITY_IN + '</span>' : html + ' ' + CITY_IN;
+}
 
 // Бренды конкурентов и наш: такие ключи всегда ведут на стандартный H1.
 const BRANDS = /kodland|кодленд|algoritmika|алгоритмик|robotek|роботек|kiber|кибер|jascode|жаскод|kursor|курсор|impact|импакт|techspace|техспейс|skillbox|скилбокс|geekbrains|гикбрейнс|hexlet|хекслет|практикум|praktikum|яндекс|yandex|contented|контентед|bang bang|id&me|шаг|step/;
@@ -46,7 +52,7 @@ export function applyHeadline(doc, search) {
  const h1 = doc.getElementById('hero-title');
  if (h1) {
   const lockup = h1.querySelector?.('.hero-ai-lockup');
-  h1.innerHTML = rule.html + (lockup ? ' ' + lockup.outerHTML : '');
+  h1.innerHTML = withCity(rule.html) + (lockup ? ' ' + lockup.outerHTML : '');
   h1.classList?.add('h1-kw');
  }
  doc.title = rule.html.replace(/<br>/g, ' ').replace(/<[^>]+>/g, '').replace(/‑ /g, '‑') + TITLE_SUFFIX;
