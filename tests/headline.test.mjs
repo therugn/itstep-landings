@@ -175,6 +175,6 @@ test('index.html: headline.js до app.js, H1 скрыт только на вр�
   assert.match(html, /classList\.remove\('h1-wait'\)\},1500\)/);
   assert.match(html, /<h1 id="hero-title"[^>]*>/, `${city}/${product}`);
   if (product === 'mka') assert.match(html, new RegExp(`<h1 id="hero-title"[^>]*>IT‑курсы <span>для детей ${CITIES[city][1]}</span></h1>`), `${city}/${product}: город в стандартном H1`);
-  if (product === 'rpo-ai' || product === 'design-ai') assert.match(html, new RegExp(`<h1 id="hero-title">[^<]*${CITIES[city][1]}</h1>`), `${city}/${product}: город в стандартном H1`);
+  if (product === 'rpo-ai' || product === 'design-ai') assert.match(html, new RegExp(`<h1 id="hero-title"[^>]*>[^<]*${CITIES[city][1]}</h1>`), `${city}/${product}: город в стандартном H1`);
  }
 });
