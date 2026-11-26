@@ -10,29 +10,6 @@ for (const button of ageButtons) {
   });
 }
 
-for (const booking of document.querySelectorAll('.booking-form')) {
-  const phone = booking.querySelector('input[type=tel]');
-  const feedback = booking.querySelector('.booking-feedback');
-
-  booking.addEventListener('input', () => {
-    phone.setCustomValidity('');
-    feedback.hidden = true;
-  });
-
-  booking.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const number = phone.value.trim();
-    const compactNumber = number.replace(/[\s()-]/g, '');
-    if (!/^(?:\+?7|8)?\d{10}$/.test(compactNumber)) {
-      phone.setCustomValidity('Введите номер в формате +7 XXX XXX-XX-XX.');
-      phone.reportValidity();
-      return;
-    }
-    feedback.textContent = 'Данные проверены. Отправка заявок пока не подключена.';
-    feedback.hidden = false;
-  });
-}
-
 const programDownload = document.querySelector('.program-download');
 const downloadStatus = document.querySelector('.download-status');
 

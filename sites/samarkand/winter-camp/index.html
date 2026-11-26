@@ -4,11 +4,32 @@
   <meta charset="utf-8">
   <base href="/winter-camp/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Тег Google: конверсии Google Ads, ID общий для всех лендингов (см. README) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18503263063"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-18503263063');</script>
+ <!-- Meta Pixel Code -->
+ <script>
+ !function(f,b,e,v,n,t,s)
+ {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+ n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+ if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+ n.queue=[];t=b.createElement(e);t.async=!0;
+ t.src=v;s=b.getElementsByTagName(e)[0];
+ s.parentNode.insertBefore(t,s)}(window, document,'script',
+ 'https://connect.facebook.net/en_US/fbevents.js');
+ fbq('init', '1661142762219170');
+ fbq('track', 'PageView');
+ </script>
+ <noscript><img height="1" width="1" style="display:none"
+ src="https://www.facebook.com/tr?id=1661142762219170&ev=PageView&noscript=1"
+ /></noscript>
+ <!-- End Meta Pixel Code -->
   <meta name="description" content="Программа зимнего IT-лагеря в Самарканде для детей 6–15 лет.">
   <title>Зимний IT-лагерь в Самарканде</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon-it-step-light.svg">
-  <link rel="stylesheet" href="styles.css?v=33">
-  <script src="camp.js?v=32" defer></script>
+  <link rel="stylesheet" href="styles.css?v=34">
+  <script src="camp.js?v=33" defer></script>
+  <script type="module" src="form.js"></script>
 </head>
 <body>
   <div class="snowfall" aria-hidden="true">
@@ -45,14 +66,14 @@
           </div>
           <div class="field">
             <label for="name">Ваше имя</label>
-            <input id="name" autocomplete="name" placeholder="Как к вам обращаться?" required>
+            <input id="name" name="name" autocomplete="name" placeholder="Как к вам обращаться?" required>
           </div>
           <div class="field">
             <label for="phone">Номер телефона</label>
-            <input id="phone" type="tel" autocomplete="tel" placeholder="+998 (__) ___-__-__" required>
+            <input id="phone" name="phone" type="tel" inputmode="tel" maxlength="25" autocomplete="tel" placeholder="+998 (__) ___-__-__" required>
           </div>
           <div class="consent">
-            <input id="consent" type="checkbox" required checked>
+            <input id="consent" name="consent" type="checkbox" required checked>
             <div><label for="consent">Согласен(на) на обработку персональных данных согласно</label> <a href="https://fsx1.itstep.org/api/v1/files/lFLI8b51OhPqBewh7TXMypOVNtNIt0AO?inline=true">политике конфиденциальности</a>.</div>
           </div>
           <button class="primary" type="submit">Записаться на пробное занятие</button>
@@ -266,14 +287,14 @@
         </div>
         <div class="field">
           <label for="repeat-name">Ваше имя</label>
-          <input id="repeat-name" autocomplete="name" placeholder="Как к вам обращаться?" required>
+          <input id="repeat-name" name="name" autocomplete="name" placeholder="Как к вам обращаться?" required>
         </div>
         <div class="field">
           <label for="repeat-phone">Номер телефона</label>
-          <input id="repeat-phone" type="tel" autocomplete="tel" placeholder="+998 (__) ___-__-__" required>
+          <input id="repeat-phone" name="phone" type="tel" inputmode="tel" maxlength="25" autocomplete="tel" placeholder="+998 (__) ___-__-__" required>
         </div>
         <div class="consent">
-          <input id="repeat-consent" type="checkbox" required checked>
+          <input id="repeat-consent" name="consent" type="checkbox" required checked>
           <div><label for="repeat-consent">Согласен(на) на обработку персональных данных согласно</label> <a href="https://fsx1.itstep.org/api/v1/files/lFLI8b51OhPqBewh7TXMypOVNtNIt0AO?inline=true">политике конфиденциальности</a>.</div>
         </div>
         <button class="primary" type="submit">Записаться на пробное занятие</button>
@@ -316,5 +337,6 @@
       <a href="https://fsx1.itstep.org/api/v1/files/lFLI8b51OhPqBewh7TXMypOVNtNIt0AO?inline=true">Политика конфиденциальности</a>
     </div>
   </footer>
+  <script type="module" src="phone.js"></script>
 </body>
 </html>

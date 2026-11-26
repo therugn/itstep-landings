@@ -4,13 +4,36 @@
   <meta charset="utf-8">
   <base href="/winter-camp/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Тег Google: конверсии Google Ads, ID общий для всех лендингов (см. README) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18503263063"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-18503263063');</script>
+ <!-- Meta Pixel Code -->
+ <script>
+ !function(f,b,e,v,n,t,s)
+ {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+ n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+ if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+ n.queue=[];t=b.createElement(e);t.async=!0;
+ t.src=v;s=b.getElementsByTagName(e)[0];
+ s.parentNode.insertBefore(t,s)}(window, document,'script',
+ 'https://connect.facebook.net/en_US/fbevents.js');
+ fbq('init', '1115445171398466');
+ fbq('track', 'PageView');
+ </script>
+ <noscript><img height="1" width="1" style="display:none"
+ src="https://www.facebook.com/tr?id=1115445171398466&ev=PageView&noscript=1"
+ /></noscript>
+ <!-- End Meta Pixel Code -->
   <meta name="description" content="Программа зимнего IT-лагеря в Ташкенте для детей 6–15 лет.">
   <title>Зимний IT-лагерь в Ташкенте</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon-it-step-light.svg">
-  <link rel="stylesheet" href="styles.css?v=32">
-  <script src="camp.js?v=32" defer></script>
+  <link rel="stylesheet" href="styles.css?v=34">
+  <script src="camp.js?v=33" defer></script>
+  <script type="module" src="form.js"></script>
+  <script type="module" src="telegram.js"></script>
 </head>
 <body>
+  <svg hidden aria-hidden="true"><symbol id="tg-icon" viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></symbol></svg>
   <div class="snowfall" aria-hidden="true">
     <div class="snowfall-near"></div>
     <div class="snowfall-far"></div>
@@ -45,14 +68,14 @@
           </div>
           <div class="field">
             <label for="name">Ваше имя</label>
-            <input id="name" autocomplete="name" placeholder="Как к вам обращаться?" required>
+            <input id="name" name="name" autocomplete="name" placeholder="Как к вам обращаться?" required>
           </div>
           <div class="field">
             <label for="phone">Номер телефона</label>
-            <input id="phone" type="tel" autocomplete="tel" placeholder="+998 (__) ___-__-__" required>
+            <input id="phone" name="phone" type="tel" inputmode="tel" maxlength="25" autocomplete="tel" placeholder="+998 (__) ___-__-__" required>
           </div>
           <div class="consent">
-            <input id="consent" type="checkbox" required checked>
+            <input id="consent" name="consent" type="checkbox" required checked>
             <div><label for="consent">Согласен(на) на обработку персональных данных согласно</label> <a href="https://fsx1.itstep.org/api/v1/files/sbPGyrehc-NmGRUY8ThNq9h_ZVgFKuKX?inline=true">политике конфиденциальности</a>.</div>
           </div>
           <button class="primary" type="submit">Записаться на пробное занятие</button>
@@ -266,14 +289,14 @@
         </div>
         <div class="field">
           <label for="repeat-name">Ваше имя</label>
-          <input id="repeat-name" autocomplete="name" placeholder="Как к вам обращаться?" required>
+          <input id="repeat-name" name="name" autocomplete="name" placeholder="Как к вам обращаться?" required>
         </div>
         <div class="field">
           <label for="repeat-phone">Номер телефона</label>
-          <input id="repeat-phone" type="tel" autocomplete="tel" placeholder="+998 (__) ___-__-__" required>
+          <input id="repeat-phone" name="phone" type="tel" inputmode="tel" maxlength="25" autocomplete="tel" placeholder="+998 (__) ___-__-__" required>
         </div>
         <div class="consent">
-          <input id="repeat-consent" type="checkbox" required checked>
+          <input id="repeat-consent" name="consent" type="checkbox" required checked>
           <div><label for="repeat-consent">Согласен(на) на обработку персональных данных согласно</label> <a href="https://fsx1.itstep.org/api/v1/files/sbPGyrehc-NmGRUY8ThNq9h_ZVgFKuKX?inline=true">политике конфиденциальности</a>.</div>
         </div>
         <button class="primary" type="submit">Записаться на пробное занятие</button>
@@ -303,6 +326,7 @@
       </div>
     </section>
   </main>
+  <a class="wa-float tg-float" data-telegram href="https://t.me/itstep_tg_manager" aria-label="Написать в Telegram"><svg class="wa-icon" aria-hidden="true"><use href="#tg-icon"/></svg></a>
   <footer>
     <div class="wrap">
       <div class="logos">
@@ -314,5 +338,6 @@
       <a href="https://fsx1.itstep.org/api/v1/files/sbPGyrehc-NmGRUY8ThNq9h_ZVgFKuKX?inline=true">Политика конфиденциальности</a>
     </div>
   </footer>
+  <script type="module" src="phone.js"></script>
 </body>
 </html>
