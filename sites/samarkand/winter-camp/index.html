@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <base href="/winter-camp/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Программа зимнего IT-лагеря в Самарканде для детей 6–15 лет.">
+  <title>Зимний IT-лагерь в Самарканде</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon-it-step-light.svg">
+  <link rel="stylesheet" href="styles.css?v=33">
+  <script src="camp.js?v=32" defer></script>
+</head>
+<body>
+  <div class="snowfall" aria-hidden="true">
+    <div class="snowfall-near"></div>
+    <div class="snowfall-far"></div>
+  </div>
+  <header class="site-header wrap">
+    <div class="logos">
+      <img src="assets/it-step.svg" alt="IT STEP" width="40" height="48">
+      <img src="assets/it-park.svg" alt="IT Park" width="44" height="48">
+    </div>
+    <button class="nav-toggle" type="button" aria-label="Меню" aria-controls="site-nav" aria-expanded="false" hidden>
+      <span aria-hidden="true"></span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Навигация по странице">
+      <a href="#program">Программа</a>
+      <a href="#booking">Пробное занятие</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+  </header>
+  <main>
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <h1>Зимний <span>IT лагерь</span> в Самарканде</h1>
+        <p class="hero-subtitle">Проведите зимние каникулы с пользой</p>
+        <ul class="hero-facts">
+          <li>Офлайн</li>
+          <li>5 дней по 3 часа</li>
+        </ul>
+        <form id="booking" class="booking-form">
+          <div class="booking-heading">
+            <h2>Запишитесь на пробное занятие</h2>
+            <p class="booking-intro">Ребенок попробует на практике и поймет, насколько ему интересны наши занятия</p>
+          </div>
+          <div class="field">
+            <label for="name">Ваше имя</label>
+            <input id="name" autocomplete="name" placeholder="Как к вам обращаться?" required>
+          </div>
+          <div class="field">
+            <label for="phone">Номер телефона</label>
+            <input id="phone" type="tel" autocomplete="tel" placeholder="+998 (__) ___-__-__" required>
+          </div>
+          <div class="consent">
+            <input id="consent" type="checkbox" required checked>
+            <div><label for="consent">Согласен(на) на обработку персональных данных согласно</label> <a href="https://fsx1.itstep.org/api/v1/files/lFLI8b51OhPqBewh7TXMypOVNtNIt0AO?inline=true">политике конфиденциальности</a>.</div>
+          </div>
+          <button class="primary" type="submit">Записаться на пробное занятие</button>
+          <p class="booking-feedback" role="status" hidden></p>
+        </form>
+      </div>
+      <div class="hero-art">
+        <img class="hero-forest" src="assets/hero-forest.webp" alt="">
+        <img class="hero-flake hero-flake-top" src="assets/hero-flake-3.webp" alt="">
+        <img class="hero-learner" src="assets/hero-learner.webp" alt="Участник зимнего IT-лагеря с ноутбуком" fetchpriority="high">
+        <img class="hero-code" src="assets/hero-code.webp" alt="">
+        <img class="hero-controller" src="assets/hero-controller.webp" alt="">
+        <img class="hero-flake hero-flake-right" src="assets/hero-flake-2.webp" alt="">
+        <img class="hero-flake hero-flake-bottom" src="assets/hero-flake-1.webp" alt="">
+      </div>
+    </section>
+    <section class="camp-intro wrap" aria-labelledby="camp-activities">
+      <div class="camp-intro-copy">
+        <div class="camp-panel">
+          <h2 id="camp-activities">Дети в лагере</h2>
+          <ul>
+            <li>Познакомятся с программированием на практике.</li>
+            <li>Придумают персонажей и соберут собственную игру.</li>
+            <li>Поработают с 3D-моделями, цифровой графикой и анимацией.</li>
+            <li>Попробуют видеомонтаж и научатся рассказывать истории.</li>
+            <li>Познакомятся с инструментами искусственного интеллекта.</li>
+          </ul>
+        </div>
+        <p class="camp-panel camp-purpose">Ребёнок попробует себя в разных ролях и найдёт занятие, которое его вдохновляет.</p>
+      </div>
+      <img class="camp-section-image" src="assets/camp-activities-winter.webp" alt="" width="699" height="466" loading="lazy">
+    </section>
+    <section class="camp-skills wrap" aria-labelledby="camp-skills">
+      <h2 id="camp-skills">На занятиях дети осваивают IT и развивают мягкие навыки</h2>
+      <ul>
+        <li>Креативность</li>
+        <li>Логика</li>
+        <li>Командная работа</li>
+        <li>Воображение</li>
+        <li>Пространственное мышление</li>
+        <li>Презентация проекта</li>
+      </ul>
+    </section>
+    <section class="program" id="program">
+      <div class="wrap">
+        <h2>Программа лагеря</h2>
+        <div class="ages" aria-label="Возрастные группы">
+          <button type="button" aria-pressed="true" data-group="junior">6–8 лет</button>
+          <button type="button" aria-pressed="false" data-group="middle">9–12 лет</button>
+          <button type="button" aria-pressed="false" data-group="senior">13–15 лет</button>
+        </div>
+        <div class="courses" id="junior">
+          <img class="program-image" src="assets/junior-program.webp" alt="" width="1000" height="636" loading="lazy">
+          <article class="course">
+            <h3>Зимняя IT-олимпиада: игры пингвинов</h3>
+            <div class="days">
+              <div class="day">
+                <div class="day-heading">
+                  <img class="day-icon" src="assets/junior-card-1-day-1.webp" alt="" width="72" height="72" loading="lazy">
+                  <h4>День 1 — Сборная пингвинов</h4>
+                </div>
+                <ul><li>Рисуем пингвина-спортсмена в AutoDraw и придумываем ему суперсилу</li><li>Создаём флаг и девиз сборной в Adobe Express</li><li>Устраиваем парад сборных</li></ul>
+              </div>
+              <div class="day">
+                <div class="day-heading">
+                  <img class="day-icon" src="assets/junior-card-1-day-2.webp" alt="" width="72" height="72" loading="lazy">
+                  <h4>День 2 — Гонки на санях</h4>
+                </div>
+                <ul><li>Собираем и программируем робота-сани из LEGO WeDo 2.0</li><li>Соревнуемся на гоночном треке</li></ul>
+              </div>
+              <div class="day">
+                <div class="day-heading">
+                  <img class="day-icon" src="assets/junior-card-1-day-3.webp" alt="" width="72" height="72" loading="lazy">
+                  <h4>День 3 — Игры на льду</h4>
+                </div>
+                <ul><li>Оживляем пингвина в Scratch</li><li>Создаём игры «Слалом» и «Кёрлинг» и проводим турнир</li></ul>
+              </div>
+            </div>
+          </article>
+          <article class="course">
+            <h3>Зимние мультяшки: пушистые истории</h3>
+            <div class="days">
+              <div class="day">
+                <div class="day-heading">
+                  <img class="day-icon" src="assets/junior-card-2-day-1.webp" alt="" width="72" height="72" loading="lazy">
+                  <h4>День 1 — Рождение героев</h4>
+                </div>
+                <ul><li>Придумываем и рисуем героев мультфильма</li><li>Пробуем первые анимационные движения</li></ul>
+              </div>
+              <div class="day">
+                <div class="day-heading">
+                  <img class="day-icon" src="assets/junior-card-2-day-2.webp" alt="" width="72" height="72" loading="lazy">
+                  <h4>День 2 — Волшебный зимний лес</h4>
+                </div>
+                <ul><li>Рисуем цифровые декорации: заснеженный лес, домики и ледяные поляны</li></ul>
+              </div>
+              <div class="day">
+                <div class="day-heading">
+                  <img class="day-icon" src="assets/junior-card-2-day-3.webp" alt="" width="72" height="72" loading="lazy">
+                  <h4>День 3 — Мотор! Начинаем съёмку</h4>
+                </div>
+                <ul><li>Лепим пластилиновых персонажей</li><li>Снимаем первые сцены в технике покадровой анимации</li></ul>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="courses" id="middle" hidden>
+          <img class="program-image" src="assets/middle-program.webp" alt="" width="1000" height="636" loading="lazy">
+          <article class="course">
+            <h3>Snow Pets</h3>
+            <div class="days">
+              <div class="day">
+                <div class="day-heading">
+                  <img class="day-icon" src="assets/middle-card-1-day-1.webp" alt="" width="72" height="72" loading="lazy">
+                  <h4>День 1 — Кто прячется в снегу</h4>
+                </div>
+                <ul><li>Придумываем и рисуем цифрового питомца</li><li>Оформляем ему паспорт с характером и особенностями</li></ul>
+              </div>
+              <div class="day">
+                <div class="day-heading">
+                  <img class="day-icon" src="assets/middle-card-1-day-2.webp" alt="" width="72" height="72" loading="lazy">
+                  <h4>День 2 — Тёплый дом для питомца</h4>
+                </div>
+                <ul><li>Моделируем уютный 3D-домик с мебелью и интерьером</li></ul>
+              </div>
+              <div class="day">
+                <div class="day-heading">
+                  <img class="day-icon" src="assets/middle-card-1-day-3.webp" alt="" width="72" height="72" loading="lazy">
+                  <h4>День 3 — Зимнее приключение</h4>
+                </div>
+                <ul><li>Создаём игровую сцену в GDevelop</li><li>Программируем управление героем и первые задания</li></ul>
+              </div>
+            </div>
+          </article>
+          <article class="course">
+            <h3>Sprunki Music Lab</h3>
+            <div class="days">
+              <div class="day">
+                <div class="day-heading">
+                  <img class="day-icon" src="assets/middle-card-2-day-1.webp" alt="" width="72" height="72" loading="lazy">
+                  <h4>День 1 — Знакомство со Sprunki</h4>
+                </div>
+                <ul><li>Создаём своего Sprunki-героя с уникальным звучанием</li><li>Собираем первую сцену в GDevelop</li></ul>
+              </div>
+              <div class="day">
+                <div class="day-heading">
+                  <img class="day-icon" src="assets/middle-card-2-day-2.webp" alt="" width="72" height="72" loading="lazy">
+                  <h4>День 2 — Собираем Sprunki-микс</h4>
+                </div>
+                <ul><li>Записываем необычные звуки и обрабатываем аудио</li><li>Собираем собственный музыкальный микс</li></ul>
+              </div>
+              <div class="day">
+                <div class="day-heading">
+                  <img class="day-icon" src="assets/middle-card-2-day-3.webp" alt="" width="72" height="72" loading="lazy">
+                  <h4>День 3 — Оживи свою Sprunki-сцену</h4>
+                </div>
+                <ul><li>Анимируем персонажей и добавляем световые эффекты</li><li>Настраиваем кнопки управления сценой</li></ul>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="courses" id="senior" hidden>
+          <img class="program-image" src="assets/neon-dash-program.webp" alt="" width="847" height="539" loading="lazy">
+          <article class="course">
+            <h3>Neon Dash</h3>
+            <div class="days">
+              <div class="day">
+                <div class="day-heading">
+                  <img class="day-icon" src="assets/senior-card-1-day-1.webp" alt="" width="72" height="72" loading="lazy">
+                  <h4>День 1 — Создай свою мелодию</h4>
+                </div>
+                <ul><li>Придумываем концепцию музыкальной игры и виртуального артиста</li><li>Генерируем трек с помощью ИИ</li></ul>
+              </div>
+              <div class="day">
+                <div class="day-heading">
+                  <img class="day-icon" src="assets/senior-card-1-day-2.webp" alt="" width="72" height="72" loading="lazy">
+                  <h4>День 2 — Первый уровень в такт музыке</h4>
+                </div>
+                <ul><li>Размечаем трек и расставляем ноты</li><li>Программируем очки, попадания и промахи</li></ul>
+              </div>
+              <div class="day">
+                <div class="day-heading">
+                  <img class="day-icon" src="assets/senior-card-1-day-3.webp" alt="" width="72" height="72" loading="lazy">
+                  <h4>День 3 — Второй уровень с прыжками</h4>
+                </div>
+                <ul><li>Создаём платформерную трассу с препятствиями</li><li>Настраиваем прыжки и автоматическое движение героя</li></ul>
+              </div>
+            </div>
+          </article>
+        </div>
+        <a class="primary program-download" href="assets/winter-camp-program.pdf" download="Зимний IT-лагерь 26-27 — программа.pdf">Скачать подробную программу</a>
+        <p class="download-status" role="status" hidden></p>
+      </div>
+    </section>
+    <section class="camp-comfort wrap" aria-labelledby="camp-comfort">
+      <div class="camp-panel">
+        <h2 id="camp-comfort">Всё для комфортного и безопасного обучения</h2>
+        <ul>
+          <li>Современные компьютеры и быстрый интернет.</li>
+          <li>Удобное рабочее место для каждого ребёнка.</li>
+          <li>Поддержка преподавателя на каждом этапе.</li>
+        </ul>
+      </div>
+      <img class="camp-section-image" src="https://tashkent.itstep.org/dist/images/courses-children/camp/comfort-kids.png" alt="Дети на занятии за компьютерами" loading="lazy">
+    </section>
+    <section class="booking-repeat wrap" aria-labelledby="booking-again-title">
+      <form id="booking-again" class="booking-form booking-form-repeat" aria-labelledby="booking-again-title">
+        <div class="booking-heading">
+          <h2 id="booking-again-title">Запишитесь на пробное занятие</h2>
+          <p class="booking-intro">Ребенок попробует на практике и поймет, насколько ему интересны наши занятия</p>
+        </div>
+        <div class="field">
+          <label for="repeat-name">Ваше имя</label>
+          <input id="repeat-name" autocomplete="name" placeholder="Как к вам обращаться?" required>
+        </div>
+        <div class="field">
+          <label for="repeat-phone">Номер телефона</label>
+          <input id="repeat-phone" type="tel" autocomplete="tel" placeholder="+998 (__) ___-__-__" required>
+        </div>
+        <div class="consent">
+          <input id="repeat-consent" type="checkbox" required checked>
+          <div><label for="repeat-consent">Согласен(на) на обработку персональных данных согласно</label> <a href="https://fsx1.itstep.org/api/v1/files/lFLI8b51OhPqBewh7TXMypOVNtNIt0AO?inline=true">политике конфиденциальности</a>.</div>
+        </div>
+        <button class="primary" type="submit">Записаться на пробное занятие</button>
+        <p class="booking-feedback" role="status" hidden></p>
+      </form>
+    </section>
+    <section class="contacts-wrap" id="contacts">
+      <div class="contacts wrap">
+        <h2>Контакты</h2>
+        <address>
+          <div class="addresses">
+            <p>г. Самарканд, ул. Гагарина, 43А</p>
+            <p class="contact-hours">Пн–Сб 10:00–19:00<br>Вс 10:00–18:00</p>
+          </div>
+          <div class="contact-links">
+            <div>
+              <p>Приёмная комиссия</p>
+              <a href="tel:+998557043343">+998 (55) 704 33 43</a>
+            </div>
+            <div>
+              <p>Учебная часть</p>
+              <a href="tel:+998557053343">+998 (55) 705 33 43</a>
+              <p class="contact-hours">Пн–Вс 09:00–19:00</p>
+            </div>
+            <a class="contact-email" href="mailto:welcome@itstep.org">welcome@itstep.org</a>
+            <a class="contact-email" href="https://t.me/itstep_samarkand">Telegram</a>
+          </div>
+        </address>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="wrap">
+      <div class="logos">
+        <img src="assets/it-step.svg" alt="IT STEP" width="40" height="48">
+        <img src="assets/it-park.svg" alt="IT Park" width="44" height="48">
+      </div>
+      <p>© 1999–2026 Компьютерная Академия IT STEP.</p>
+      <a href="https://samarkand.itstep.org/ru/public-offer-agreement">Публичный договор</a>
+      <a href="https://fsx1.itstep.org/api/v1/files/lFLI8b51OhPqBewh7TXMypOVNtNIt0AO?inline=true">Политика конфиденциальности</a>
+    </div>
+  </footer>
+</body>
+</html>
