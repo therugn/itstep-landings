@@ -1,0 +1,20 @@
+/* Three section links on desktop; a disclosure menu on mobile. */
+.course-header{position:relative;justify-content:space-between;gap:24px}
+.course-navigation{display:flex;align-items:center;gap:30px;margin-left:auto}
+.course-navigation a{display:inline-flex;align-items:center;min-height:44px;color:#f5f5f5;text-decoration:none;font-size:16px;font-weight:600;white-space:nowrap}
+.course-navigation a:hover{color:#a5d74f}
+.menu-toggle{display:none}
+@media(max-width:700px){
+ .course-header{gap:12px;z-index:10}
+ .course-header .logos{min-width:0}
+ .course-header .menu-toggle{display:inline-flex;align-items:center;justify-content:center;flex:0 0 44px;width:44px;height:44px;min-height:44px;padding:9px;border:1px solid #555465;border-radius:10px;background:#292929;color:#fff}
+ .menu-toggle svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+ .menu-toggle .menu-close{display:none}
+ .menu-toggle[aria-expanded="true"] .menu-lines{display:none}
+ .menu-toggle[aria-expanded="true"] .menu-close{display:block}
+ .course-navigation{position:absolute;top:calc(100% - 4px);left:20px;right:20px;display:flex;flex-direction:column;align-items:stretch;gap:0;margin:0;padding:8px;border:1px solid #555465;border-radius:14px;background:#292929;box-shadow:0 12px 24px #0005}
+ .course-navigation a{min-height:48px;padding:12px 16px;border-radius:8px}
+ .course-navigation a:hover{background:#414157}
+ .course-header:not([data-navigation-ready]){height:auto;min-height:90px;flex-wrap:wrap;padding-block:20px}
+ .course-header:not([data-navigation-ready]) .course-navigation{position:static;flex-basis:100%}
+}

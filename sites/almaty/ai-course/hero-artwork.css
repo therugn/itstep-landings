@@ -16,3 +16,19 @@
  .dark .hero .facts .fact{padding-inline:12px}
  .dark .hero .facts h3{font-size:16px}
 }
+
+/* Reserve more desktop width for the artwork so a tall form does not leave
+   a large empty area above a small, bottom-aligned image. */
+@media(min-width:1100px){
+ .dark .hero-main{grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:32px}
+ .dark .hero-form{gap:16px}
+ .dark .hero-form-intro h2{font-size:24px}
+ .dark .hero-copy{padding-bottom:18px}
+ .dark .hero-art .portrait{right:-12px;width:calc(100% + 12px);max-width:calc(100% + 12px)}
+}
+@media(min-width:701px) and (max-width:1099px){
+ .dark .hero-main{display:flex;flex-direction:column;align-items:center;gap:0;min-height:0}
+ .dark .hero-copy{width:100%;max-width:520px;align-self:center}
+ .dark .hero-art{width:100%;height:clamp(320px,58vw,520px);min-height:0;flex:none;align-self:stretch}
+ .dark .hero-art .portrait{position:static;display:block;width:100%;max-width:none;height:100%;max-height:none;object-fit:contain;object-position:center bottom}
+}
