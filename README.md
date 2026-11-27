@@ -16,6 +16,7 @@
 | `sites/samarkand/vibe-coding` | https://samarkand.stepacademy.uz/vibe-coding/ |
 | `sites/astana/ai-course` | https://astana.it-step.kz/ai-course |
 | `sites/tashkent/ai-course` | https://tashkent.stepacademy.uz/ai-course |
+| `sites/tashkent/data-analytics` | https://tashkent.stepacademy.uz/data-analytics/ |
 | `sites/astana/mka` | https://astana.it-step.kz/mka |
 | `sites/almaty/rpo-ai` | https://almaty.it-step.kz/rpo-ai |
 | `sites/almaty/mka` | https://almaty.it-step.kz/mka |

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <base href="/data-analytics/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f8ef">
+  <meta name="description" content="Очный курс Data Analytics в Компьютерной Академии IT STEP в Ташкенте. SQL, Power BI и Python для анализа данных.">
+  <title>Курс по Data Analytics в Ташкенте — IT STEP</title>
+  <link rel="icon" type="image/png" sizes="64x64" href="./favicon.png">
+  <link rel="stylesheet" href="./styles.css?v=16">
+  <script src="./form.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-content">
+      <div class="brands" aria-label="IT STEP и IT Park">
+        <img class="brand-step" src="./assets/it-step.svg" alt="IT STEP">
+        <img class="brand-park" src="./assets/it-park.svg" alt="IT Park">
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container" aria-labelledby="course-title">
+      <div class="hero-content">
+        <h1 id="course-title">Курс по <span>Data <span class="title-break">Analytics</span></span></h1>
+        <p class="course-description" id="course-description">Научитесь работать с данными в SQL и Python и создавать отчёты и дашборды в Power BI.</p>
+        <ul class="course-facts" aria-label="Формат и длительность курса">
+          <li>9 месяцев</li>
+          <li>Офлайн в Ташкенте</li>
+        </ul>
+        <section class="application" id="application" aria-labelledby="application-title">
+          <h2 id="application-title">Оставьте заявку на курс</h2>
+          <p class="application-description">Узнайте подробнее о программе и формате занятий.</p>
+
+          <form id="course-form" method="post">
+            <div class="fields">
+              <div class="field">
+                <label for="name">Ваше имя <span aria-hidden="true">*</span></label>
+                <input id="name" name="name" autocomplete="name" placeholder="Как к вам обращаться?" maxlength="100" required>
+              </div>
+              <div class="field">
+                <label for="phone">Номер телефона <span aria-hidden="true">*</span></label>
+                <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+998 (__) ___-__-__" maxlength="32" required>
+              </div>
+            </div>
+            <div class="consent">
+              <input id="consent" name="consent" type="checkbox" autocomplete="off" checked required>
+              <div>
+                <label for="consent">Согласен(на) на обработку персональных данных согласно</label>
+                <a href="https://fsx1.itstep.org/api/v1/files/sbPGyrehc-NmGRUY8ThNq9h_ZVgFKuKX?inline=true" target="_blank" rel="noopener">политике конфиденциальности</a>.
+              </div>
+            </div>
+            <button type="submit" disabled>Записаться</button>
+            <p class="form-status" id="form-status" role="status"></p>
+            <noscript><p class="form-status">Для проверки формы включите JavaScript.</p></noscript>
+          </form>
+        </section>
+      </div>
+
+      <div class="hero-visual">
+        <img src="./assets/course-photo-landscape.webp" alt="Девушка с ноутбуком" width="1200" height="800" loading="lazy" decoding="async">
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <section class="contacts" id="contacts" aria-labelledby="contact-title">
+        <h2 id="contact-title">Контакты</h2>
+        <address>
+          <a class="contact-address" href="https://yandex.com/maps/org/it_step_academy/221025346487/" target="_blank" rel="noopener">Ташкент, Мирабадский район,<br>ул. Амира Темура, 15</a>
+          <div class="contact-reception">
+            <div class="contact-admissions">
+              <p>Приёмная комиссия</p>
+              <a class="contact-phone" href="tel:+998555883343">+998 555 883 343</a>
+            </div>
+            <div class="contact-hours">
+              <span>Пн–Сб 09:30–19:00</span>
+              <span>Вс 10:00–18:00</span>
+            </div>
+          </div>
+          <a class="contact-email" href="mailto:welcome@itstep.org">welcome@itstep.org</a>
+        </address>
+      </section>
+      <div class="footer-meta">
+        <div class="brands" aria-label="IT STEP и IT Park">
+          <img class="brand-step" src="./assets/it-step.svg" alt="IT STEP">
+          <img class="brand-park" src="./assets/it-park.svg" alt="IT Park">
+        </div>
+        <p class="copyright">© 1999–2026 Компьютерная Академия IT STEP.</p>
+        <nav class="legal" aria-label="Юридические документы">
+          <a href="https://tashkent.itstep.org/ru/public-offer-agreement" target="_blank" rel="noopener">Публичная оферта на мастер-классы</a>
+          <a href="https://fsx1.itstep.org/api/v1/files/sbPGyrehc-NmGRUY8ThNq9h_ZVgFKuKX?inline=true" target="_blank" rel="noopener">Политика конфиденциальности</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+  <script type="module" src="phone.js"></script>
+</body>
+</html>
