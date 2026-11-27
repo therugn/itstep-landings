@@ -1,29 +1,34 @@
-const form = document.querySelector('#course-form');
-const nameField = document.querySelector('#name');
-const phone = document.querySelector('#phone');
-const status = document.querySelector('#form-status');
+// Заявка уходит в приёмщик (lead.js): CRM филиала + журнал + Telegram; после подтверждения — страница «Спасибо».
+import {validateLead, submitLead} from './lead.js';
 
-form.addEventListener('input', (event) => {
-  if (event.target === nameField || event.target === phone) {
-    event.target.setCustomValidity('');
-  }
+const form = document.querySelector('#course-form');
+const name = form.elements.namedItem('name');
+const phone = form.elements.namedItem('phone');
+const consent = form.elements.namedItem('consent');
+const status = document.querySelector('#form-status');
+const submit = form.querySelector('button[type=submit]');
+
+form.addEventListener('input', () => {
+  for (const field of [name, phone, consent]) field.setCustomValidity('');
   status.textContent = '';
 });
 
-form.addEventListener('submit', (event) => {
+form.addEventListener('submit', async (event) => {
   event.preventDefault();
-
-  const digits = phone.value.replace(/\D/g, '');
-  const hasLocalNumber = digits.length === 9 && !phone.value.trimStart().startsWith('+');
-  const hasCountryCode = /^998\d{9}$/.test(digits);
-  const validPhone = /^[+\d\s().-]+$/.test(phone.value) && (hasLocalNumber || hasCountryCode);
-
-  nameField.setCustomValidity(nameField.value.trim() ? '' : 'Введите ваше имя.');
-  phone.setCustomValidity(validPhone ? '' : 'Введите номер в формате +998 XX XXX-XX-XX.');
-
-  if (form.reportValidity()) {
-    status.textContent = 'Данные проверены. В режиме предпросмотра отправка заявки недоступна.';
+  const data = {name: name.value, phone: phone.value, consent: consent.checked, website: ''};
+  const errors = validateLead(data);
+  name.setCustomValidity(errors.name || '');
+  phone.setCustomValidity(errors.phone || '');
+  consent.setCustomValidity(errors.consent || '');
+  if (!form.reportValidity()) return;
+  submit.disabled = true;
+  status.textContent = 'Отправляем заявку…';
+  const result = await submitLead(data);
+  submit.disabled = false;
+  status.textContent = result.message;
+  if (result.ok && result.thanks) {
+    location.assign(new URL('spasibo/?t=' + encodeURIComponent(result.thanks), document.baseURI));
   }
 });
 
-form.querySelector('button').disabled = false;
+submit.disabled = false;

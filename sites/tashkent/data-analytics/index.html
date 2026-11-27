@@ -4,14 +4,36 @@
   <meta charset="utf-8">
   <base href="/data-analytics/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Тег Google: конверсии Google Ads, ID общий для всех лендингов (см. README) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18503263063"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-18503263063');</script>
+ <!-- Meta Pixel Code -->
+ <script>
+ !function(f,b,e,v,n,t,s)
+ {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+ n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+ if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+ n.queue=[];t=b.createElement(e);t.async=!0;
+ t.src=v;s=b.getElementsByTagName(e)[0];
+ s.parentNode.insertBefore(t,s)}(window, document,'script',
+ 'https://connect.facebook.net/en_US/fbevents.js');
+ fbq('init', '1115445171398466');
+ fbq('track', 'PageView');
+ </script>
+ <noscript><img height="1" width="1" style="display:none"
+ src="https://www.facebook.com/tr?id=1115445171398466&ev=PageView&noscript=1"
+ /></noscript>
+ <!-- End Meta Pixel Code -->
   <meta name="theme-color" content="#f5f8ef">
   <meta name="description" content="Очный курс Data Analytics в Компьютерной Академии IT STEP в Ташкенте. SQL, Power BI и Python для анализа данных.">
   <title>Курс по Data Analytics в Ташкенте — IT STEP</title>
   <link rel="icon" type="image/png" sizes="64x64" href="./favicon.png">
-  <link rel="stylesheet" href="./styles.css?v=16">
-  <script src="./form.js" defer></script>
+  <link rel="stylesheet" href="./styles.css?v=17">
+  <script type="module" src="form.js"></script>
+  <script type="module" src="telegram.js"></script>
 </head>
 <body>
+  <svg hidden aria-hidden="true"><symbol id="tg-icon" viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></symbol></svg>
   <header class="site-header">
     <div class="container header-content">
       <div class="brands" aria-label="IT STEP и IT Park">
@@ -64,6 +86,7 @@
       </div>
     </section>
   </main>
+  <a class="wa-float tg-float" data-telegram href="https://t.me/itstep_tg_manager" aria-label="Написать в Telegram"><svg class="wa-icon" aria-hidden="true"><use href="#tg-icon"/></svg></a>
 
   <footer class="site-footer">
     <div class="container footer-content">
