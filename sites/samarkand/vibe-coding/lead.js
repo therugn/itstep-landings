@@ -10,6 +10,7 @@ export function buildPayload(data, loc = globalThis.location, doc = globalThis.d
  if (data.ageLabel) payload.answer_age = data.ageLabel;
  if (doc?.documentElement?.dataset?.h1) payload.h1 = doc.documentElement.dataset.h1;   // заголовок под ключ (headline.js)
  new URLSearchParams(loc.search).forEach((value, key) => { if (TRACKING.test(key)) payload[key] = value; });
+ for (const part of String(doc?.cookie || '').split(';')) { const c = part.trim(), i = c.indexOf('='); if (/^_fb[pc]$/.test(c.slice(0, i))) payload[c.slice(1, i)] = c.slice(i + 1); }   // куки пикселя Meta (_fbp, _fbc): CRM передаёт их Meta вместе с заявкой
  return payload;
 }
 export function validateLead(data) {
